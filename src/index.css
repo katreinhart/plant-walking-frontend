@@ -32,6 +32,7 @@ a {
 
 .carousel-arrow {
   padding: 6em 0.5em;
+  cursor: pointer;
 }
 
 .progress-bar {

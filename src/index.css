@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background-color: #2F0015;
+  color: #fff;
+}
+
+.plant-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 500px;
+}
+
+.plant-image {
+  align-self: flex-end;
+}
+
+.carousel-arrow {
+  padding: 50% 0.5em;
+}
+
+.progress-bar {
+  height: 1em;
+  background-color: #8E4946;
+}
+
+.add-steps-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-steps-input, .add-steps-button {
+  height: 50px;
+  min-width: 500px;
+  margin: 10px;
+  font-size: 1.2em;
+  text-align: center;
+  border: none;
+}
+
+.add-steps-input {
+  color: #576930;
+  background-color: #EFF4E7;
+}
+
+.add-steps-button {
+  color: #ffcfe4;
+  background-color: #C00156;
+  text-transform: uppercase;
+}
+
+.view-garden-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em;
+}

@@ -19,11 +19,31 @@ a {
   text-decoration: none;
 }
 
+.m-1 {
+  margin: 1em;
+}
+
+.m-2 {
+  margin: 2em;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.outermost-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /*justify-content: space-between;*/
+}
+
+/*=====HOME VIEW=====*/
 .plant-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 300px;
+  margin-top: auto;
 }
 
 .plant-image {
@@ -33,6 +53,11 @@ a {
 .carousel-arrow {
   padding: 6em 0.5em;
   cursor: pointer;
+}
+
+.topsoil-line {
+  background-color: #432221;
+  height: 0.2em;
 }
 
 .progress-bar {
@@ -88,7 +113,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1em;
+  margin: auto 1em 1em 1em;
 }
 
 .view-garden-container > a,
@@ -101,6 +126,24 @@ a {
 .view-garden-container > .material-icons:hover {
   color: #738b3c;
 }
+
+/*=====PAST PLANT VIEW=====*/
+
+.past-plant-soil {
+  background-color: #6F3A38;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 40%;
+}
+
+/*===FORM VIEW===*/
+.close-form {
+  padding: 1em;
+  margin-left: auto;
+}
+
 
 @media(min-width: 528px){
   .add-steps-container {

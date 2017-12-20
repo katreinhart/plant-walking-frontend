@@ -13,11 +13,9 @@ class App extends Component {
     return (
       <div className="outermost-container">
         <Navigation />
-
+          <CloseForm />
           <PlantContainer />
-            <ProgressBar />
-            <AddStepsContainer />
-            <ViewGarden />
+            <PastPlantDetails />
       </div>
     );
   }

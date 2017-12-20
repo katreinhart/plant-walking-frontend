@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Garden from './components/Garden'
 import HomePlant from './components/HomePlant'
 import Menu from './components/Menu'
+import History from './components/History'
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
           <Route path='/' exact={true} component={ HomePlant } />
           <Route path='/garden' component={ Garden } />
           <Route path='/menu' component={ Menu } />
+          <Route path='/history' component={ History } />
         </div>
       </Router>
     );
@@ -21,21 +23,3 @@ class App extends Component {
 }
 
 export default App;
-
-//HOME
-// <div className="outermost-container">
-//   <Navigation />
-//
-//     <PlantContainer />
-//       <ProgressBar />
-//       <AddStepsContainer />
-//       <ViewGarden />
-// </div>
-
-//PAST PLANT VIEW
-// <div className="outermost-container">
-//   <Navigation />
-//     <CloseForm />
-//     <PlantContainer />
-//       <PastPlantDetails />
-// </div>

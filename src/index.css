@@ -25,6 +25,14 @@ a {
   text-decoration: none;
 }
 
+h2 {
+  text-transform: uppercase;
+}
+
+hr {
+  border: 1px solid #EEEEEE;
+}
+
 .m-1 {
   margin: 1em;
 }
@@ -39,6 +47,10 @@ a {
 
 .mt-5 {
   margin-top: 5em;
+}
+
+.text-ctr {
+  text-align: center;
 }
 
 .outermost-container {
@@ -179,6 +191,14 @@ a {
 .close-form {
   padding: 1em;
   margin-left: auto;
+}
+
+/*=====HISTORY VIEW=====*/
+.history-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #7F9847;
 }
 
 

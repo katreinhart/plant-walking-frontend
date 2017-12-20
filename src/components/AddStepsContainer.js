@@ -1,11 +1,11 @@
 import React from 'react'
 
-const AddStepsContainer = () => {
+const AddStepsContainer = ({ addSteps }) => {
   return (
-    <div className="add-steps-container">
+    <form className="add-steps-container" onSubmit={ addSteps }>
       <input className="add-steps-input" type="text" />
       <button className="add-steps-button">Add Steps</button>
-    </div>
+    </form>
   )
 }
 

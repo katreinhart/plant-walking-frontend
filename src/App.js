@@ -22,7 +22,7 @@ class App extends Component {
       <div className="outermost-container">
         <Navigation />
         <PlantContainer />
-        <ProgressBar />
+        <ProgressBar percent={50} />
         <AddStepsContainer addSteps={ this.addSteps } />
         <ViewGarden />
       </div>

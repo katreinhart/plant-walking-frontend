@@ -31,6 +31,7 @@ h2 {
 
 hr {
   border: 1px solid #EEEEEE;
+  margin: 0em;
 }
 
 .m-1 {
@@ -199,6 +200,38 @@ hr {
   align-items: center;
   justify-content: space-around;
   color: #7F9847;
+  padding: 0.25em;
+  transition: 0.5s;
+}
+
+/* click whole div to edit?*/
+/*.history-item:hover{
+  background-color: #F2F4EC;
+}
+
+.history-item:active{
+  background-color: #E5EADA;
+}*/
+
+.history-title {
+  color: #7F9847;
+}
+
+.history-column {
+  width: 33%;
+}
+
+.edit-steps{
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.edit-steps:hover{
+  color: #94AD5B;
+}
+
+.edit-steps:active{
+  color: #71883C;
 }
 
 

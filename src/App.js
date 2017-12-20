@@ -1,92 +1,21 @@
 import React, { Component } from 'react';
-import './App.css';
-import Navigation from './components/Navigation'
-import PlantContainer from './components/PlantContainer'
-import ProgressBar from './components/ProgressBar'
-import AddStepsContainer from './components/AddStepsContainer'
-import ViewGarden from './components/ViewGarden'
-import PastPlantDetails from './components/PastPlantDetails'
-import CloseForm from './components/CloseForm'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import Garden from './components/Garden'
+import HomePlant from './components/HomePlant'
+import Menu from './components/Menu'
 
 class App extends Component {
+
   render() {
     return (
-      <div className="outermost-container">
-        <Navigation />
-          <div className="back-to-plant-container">
-            <i className="material-icons">keyboard_arrow_up</i>
-            <a href="#">Back to plant</a>
-          </div>
-
-          <div className="garden-container">
-
-            <div className="garden-row">
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-            </div>
-
-            <div className="garden-row">
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-            </div>
-
-            <div className="garden-row">
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-            </div>
-
-            <div className="garden-row">
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-            </div>
-
-          </div>
-
-
-
-
-
-      </div>
+      <Router>
+        <div className="outermost-container">
+          <Route path='/' exact={true} component={ HomePlant } />
+          <Route path='/garden' component={ Garden } />
+          <Route path='/menu' component={ Menu } />
+        </div>
+      </Router>
     );
   }
 }
@@ -96,6 +25,7 @@ export default App;
 //HOME
 // <div className="outermost-container">
 //   <Navigation />
+//
 //     <PlantContainer />
 //       <ProgressBar />
 //       <AddStepsContainer />

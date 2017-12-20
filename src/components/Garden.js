@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Navigation from './Navigation'
+import BackToPlant from './BackToPlant'
 
 class Garden extends Component {
   state = {}
@@ -8,12 +10,12 @@ class Garden extends Component {
       <div className="outermost-container">
         <Navigation />
           <div className="back-to-plant-container">
-            <i className="material-icons">keyboard_arrow_up</i>
-            <a href="#">Back to plant</a>
+            <Link to='/'>
+              <BackToPlant />
+            </Link>
           </div>
 
           <div className="garden-container">
-
             <div className="garden-row">
               <div className="garden-plant-box odd-plant-row">
                 <i className=" plant material-icons">insert_emoticon</i>

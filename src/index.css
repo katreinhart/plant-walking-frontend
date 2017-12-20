@@ -116,8 +116,15 @@ a {
   margin: auto 1em 1em 1em;
 }
 
+.back-to-plant-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em 1em auto 1em;
+}
+
 .view-garden-container > a,
-.view-garden-container > .material-icons {
+.view-garden-container > .material-icons, .back-to-plant-container > a, .back-to-plant-container > .material-icons {
   color: #7F9847;
   cursor: pointer;
 }
@@ -126,6 +133,27 @@ a {
 .view-garden-container > .material-icons:hover {
   color: #738b3c;
 }
+
+/*=====GARDEN VIEW=====*/
+
+.garden-row {
+  display: flex;
+}
+
+.garden-plant-box {
+  background-color: #E8F2F8;
+  width: 100vw;
+  height: 25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.odd-plant-row:nth-child(odd), .even-plant-row:nth-child(even) {
+  background-color: #D5E7F2;
+}
+
+
 
 /*=====PAST PLANT VIEW=====*/
 

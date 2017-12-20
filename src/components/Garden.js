@@ -5,8 +5,8 @@ import BackToPlant from './BackToPlant'
 
 class Garden extends Component {
   state = {}
-  render() { 
-    return ( 
+  render() {
+    return (
       <div className="outermost-container">
         <Navigation />
           <div className="back-to-plant-container">
@@ -15,7 +15,7 @@ class Garden extends Component {
             </Link>
           </div>
 
-          <div className="garden-container">
+          <div className="garden-container mt-5">
             <div className="garden-row">
               <div className="garden-plant-box odd-plant-row">
                 <i className=" plant material-icons">insert_emoticon</i>
@@ -80,5 +80,5 @@ class Garden extends Component {
      )
   }
 }
- 
+
 export default Garden;

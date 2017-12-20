@@ -10,8 +10,14 @@ body {
 nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  min-height: 50px;
   padding: 1em;
   background-color: #2F0015;
+  color: #fff;
+}
+
+.brand, .hamburger {
   color: #fff;
 }
 
@@ -31,11 +37,14 @@ a {
   margin-top: 1em;
 }
 
+.mt-5 {
+  margin-top: 5em;
+}
+
 .outermost-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  /*justify-content: space-between;*/
 }
 
 /*=====HOME VIEW=====*/
@@ -177,5 +186,5 @@ a {
   .add-steps-container {
     margin: 1em auto;
   }
-  
+
 }

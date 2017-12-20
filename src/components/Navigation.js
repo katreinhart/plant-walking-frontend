@@ -1,10 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Navigation = () => {
   return (
     <nav>
       <div>brand</div>
-      <i className="material-icons">menu</i>
+      <Link to='/menu'>
+        <i className="material-icons">menu</i>
+      </Link>
     </nav>
   )
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ProgressBar = ({ percent }) => {
-  console.log(percent + '% finished')
   const style = {
     width: `${percent}%`
   }

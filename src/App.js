@@ -13,9 +13,79 @@ class App extends Component {
     return (
       <div className="outermost-container">
         <Navigation />
-          <CloseForm />
-          <PlantContainer />
-            <PastPlantDetails />
+          <div className="back-to-plant-container">
+            <i className="material-icons">keyboard_arrow_up</i>
+            <a href="#">Back to plant</a>
+          </div>
+
+          <div className="garden-container">
+
+            <div className="garden-row">
+              <div className="garden-plant-box odd-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box odd-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box odd-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box odd-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+            </div>
+
+            <div className="garden-row">
+              <div className="garden-plant-box even-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box even-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box even-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box even-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+            </div>
+
+            <div className="garden-row">
+              <div className="garden-plant-box odd-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box odd-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box odd-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box odd-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+            </div>
+
+            <div className="garden-row">
+              <div className="garden-plant-box even-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box even-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box even-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+              <div className="garden-plant-box even-plant-row">
+                <i className=" plant material-icons">insert_emoticon</i>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+
       </div>
     );
   }
@@ -26,7 +96,6 @@ export default App;
 //HOME
 // <div className="outermost-container">
 //   <Navigation />
-//
 //     <PlantContainer />
 //       <ProgressBar />
 //       <AddStepsContainer />

@@ -8,6 +8,7 @@ import History from './components/History'
 import EditSteps from './components/EditSteps'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
+import Welcome from './components/Welcome'
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path='/editsteps' component={ EditSteps } />
           <Route path='/signup' component={ SignUp } />
           <Route path='/login' component={ LogIn } />
+          <Route path='/welcome' component={ Welcome } />
         </div>
       </Router>
     );

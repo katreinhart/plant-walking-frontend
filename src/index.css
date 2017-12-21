@@ -311,6 +311,20 @@ hr {
   color: #71883C;
 }
 
+/*===SPLASH PAGE===*/
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.splash-image {
+  display: flex;
+  margin: 1em auto;
+  max-height: 300px;
+  padding: 3em;
+}
+
 
 @media(min-width: 528px){
   .add-steps-container {

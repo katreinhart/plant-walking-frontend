@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 // import './App.css';
-import Navigation from './Navigation'
+import Navigation from '../shared/Navigation'
 import PlantContainer from './PlantContainer'
 import ProgressBar from './ProgressBar'
 import AddStepsContainer from './AddStepsContainer'
-import ViewGarden from './ViewGarden'
-import PastPlantDetails from './PastPlantDetails'
-import CloseForm from './CloseForm'
+import ViewGarden from '../garden/ViewGarden'
+import PastPlantDetails from '../PastPlantDetails'
+import CloseForm from '../CloseForm'
 import axios from 'axios'
 
 class HomePlant extends Component {

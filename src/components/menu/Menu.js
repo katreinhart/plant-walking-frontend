@@ -1,6 +1,6 @@
 import React from 'react'
 import MenuItem from './MenuItem'
-import Navigation from './Navigation'
+import Navigation from '../shared/Navigation'
 
 const menuStuff = ['home', 'back', 'menu thing 3']
 

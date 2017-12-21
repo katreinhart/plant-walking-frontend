@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Navigation from './Navigation'
+import Navigation from '../shared/Navigation'
 import BackToPlant from './BackToPlant'
 
 class Garden extends Component {

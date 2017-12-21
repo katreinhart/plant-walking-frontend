@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Navigation from './Navigation'
-import CloseForm from './CloseForm'
-import TextInputLabeled from './TextInputLabeled'
-import GreenButton from './GreenButton'
+import Navigation from '../shared/Navigation'
+import CloseForm from '../CloseForm'
+import TextInputLabeled from '../TextInputLabeled'
+import GreenButton from '../shared/GreenButton'
 
 class SignUp extends Component {
   state = {}

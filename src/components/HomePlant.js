@@ -21,10 +21,9 @@ class HomePlant extends Component {
 
   addSteps (e) {
     e.preventDefault()
-    const input = e.target.querySelector('.add-steps-input')
+    const input = e.target.querySelector('.input-field')
     const stepsAdded = parseInt(input.value)
     input.value = ''
-
     axios.post('http://localhost:2999/api/steps',{
       user_id: 1,
       number_of_steps: stepsAdded

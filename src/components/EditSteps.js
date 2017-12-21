@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Navigation from './Navigation'
 import CloseForm from './CloseForm'
+import TextInput from './TextInput'
+import GreenButton from './GreenButton'
 
 class EditSteps extends Component {
   state = {}
@@ -10,16 +12,14 @@ class EditSteps extends Component {
       <div className="outermost-container">
         <Navigation />
         <CloseForm title="Edit Steps"/>
-        <div className="input-container">
-          <p className="text-ctr green">Date</p>
-          <input className="input-field" type="text" />
-        </div>
+        <p className="text-ctr green" id="date">Date</p>
+        <TextInput />
         <div className="buttons-container">
           <div className="delete">
             <p>Delete</p>
             <i className="material-icons">delete</i>
           </div>
-          <button className="button save-button">Save</button>
+          <GreenButton text="Save"/>
         </div>
       </div>
     )

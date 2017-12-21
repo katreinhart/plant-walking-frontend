@@ -1,12 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-const TextInputLabeled = ({ label }) => {
+const TextInputLabeled = ({ role, label, onChange }) => {
     return (
       <div className="input-container">
         <p className="input-label green">
           { label }</p>
-        <input className="input-field" type="text" />
+        <input className="input-field" type={ role } onChange={ onChange } />
       </div>
     )
 }

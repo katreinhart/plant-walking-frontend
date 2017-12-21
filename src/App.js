@@ -19,7 +19,7 @@ class App extends Component {
           <Route path='/menu' component={ Menu } />
           <Route path='/history' component={ History } />
           <Route path='/editsteps' component={ EditSteps } />
-          <Route path='/signup' component={ SignUp } />
+          <Route path='/welcome' component={ SignUp } />
         </div>
       </Router>
     );

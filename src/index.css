@@ -50,8 +50,13 @@ hr {
   margin-top: 5em;
 }
 
+
 .text-ctr {
   text-align: center;
+}
+
+.green {
+  color: #7F9847;
 }
 
 .outermost-container {
@@ -87,16 +92,19 @@ hr {
   background-color: #8E4946;
 }
 
-.add-steps-container {
+.buttons-container,
+.input-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   max-width: 500px;
-  margin: 1em;
+  margin: 1em auto 1em;
+  align-items: center;
+  width: 90%;
 }
 
-.add-steps-input, .add-steps-button {
+.input-field,
+.button {
   height: 50px;
   width: 100%;
   margin: 8px;
@@ -105,6 +113,7 @@ hr {
   border: none;
 }
 
+.input-field,
 .add-steps-input {
   color: #576930;
   background-color: #EFF4E7;
@@ -115,12 +124,15 @@ hr {
   background-color: #eff7e3;
 }
 
-.add-steps-button {
-  color: #ffcfe4;
-  background-color: #C00156;
+.button {
   text-transform: uppercase;
   transition: 0.5s;
   cursor: pointer;
+}
+
+.add-steps-button {
+  color: #ffcfe4;
+  background-color: #C00156;
 }
 
 .add-steps-button:hover {
@@ -207,7 +219,48 @@ hr {
   align-items: center;
 }
 
+.save-button {
+  background-color: #7F9847;
+  color: #F2F4EC;
+  transition: 0.5s;
+}
 
+.delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1em;
+  width: 100%;
+  cursor: pointer;
+}
+
+.delete > p, .delete > .material-icons {
+  color: #C00156;
+}
+
+.delete > p {
+  margin-right: 0.5em;
+}
+
+.buttons-container {
+  margin-top: auto;
+}
+
+.save-button:hover {
+  background-color: #8CA650;
+}
+
+.save-button:active {
+  background-color: #768F3E;
+}
+
+.delete:hover {
+  background-color: #F8E5EE;
+}
+
+.delete:active {
+  background-color: #F2CCDD;
+}
 
 /*=====HISTORY VIEW=====*/
 .history-item{

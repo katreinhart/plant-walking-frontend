@@ -1,9 +1,10 @@
 import React from 'react'
 
-const CloseForm = () => {
+const CloseForm = ({ title }) => {
   return (
     <div className="close-form">
-      <i className="material-icons">close</i>
+      <h3 className="title">{ title }</h3>
+      <i className="material-icons close-x">close</i>
     </div>
   )
 }

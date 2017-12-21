@@ -5,6 +5,7 @@ import Garden from './components/Garden'
 import HomePlant from './components/HomePlant'
 import Menu from './components/Menu'
 import History from './components/History'
+import EditSteps from './components/EditSteps'
 
 class App extends Component {
 
@@ -16,6 +17,7 @@ class App extends Component {
           <Route path='/garden' component={ Garden } />
           <Route path='/menu' component={ Menu } />
           <Route path='/history' component={ History } />
+          <Route path='/editsteps' component={ EditSteps } />
         </div>
       </Router>
     );

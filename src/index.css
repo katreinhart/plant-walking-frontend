@@ -266,6 +266,11 @@ hr {
   margin-top: 2em;
 }
 
+.input-label {
+  margin: 1em auto 0em 0em;
+  text-transform: uppercase;
+}
+
 /*=====HISTORY VIEW=====*/
 .history-item{
   display: flex;

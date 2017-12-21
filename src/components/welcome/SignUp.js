@@ -23,10 +23,8 @@ class SignUp extends Component {
 
   async handleSignUp (e) {
     e.preventDefault()
-    console.log(this.state.email, this.state.password)
     const { email, password } = this.state
-    const response = await axios.post(`${localhostUrl}/register`, { email, password })
-    console.log(response)
+    const response = await axios.post(`${localhostUrl}/register`, { email, password }) 
   }
 
   handleEmailChange(e) {
@@ -44,14 +42,13 @@ class SignUp extends Component {
       <div className="outermost-container">
         <CloseForm title="Sign Up"/>
         <form onSubmit={ this.handleSignUp }>
-          <TextInputLabeled label="username"/>
           <TextInputLabeled label="e-mail" onChange={ this.handleEmailChange }/>
           <TextInputLabeled role='password' label="password" onChange={ this.handlePasswordChange }/>
           <div className="buttons-container">
             <GreenButton text="sign up" htmlFor='submit'/>
           </div>
         </form>
-        <Link to='/register'>Need to sign up? Click here!</Link>
+        <Link to='/login'>Already registered? Click here!</Link>
       </div>
     )
   }

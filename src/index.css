@@ -190,9 +190,24 @@ hr {
 
 /*===FORM VIEW===*/
 .close-form {
+  display: flex;
   padding: 1em;
-  margin-left: auto;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.close-x {
+  text-align: right;
+}
+
+.title {
+  color: #7F9847;
+  margin: 0em;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+
 
 /*=====HISTORY VIEW=====*/
 .history-item{
@@ -206,11 +221,11 @@ hr {
 
 /* click whole div to edit?*/
 /*.history-item:hover{
-  background-color: #F2F4EC;
+  background-color: #EFF4E7;
 }
 
 .history-item:active{
-  background-color: #E5EADA;
+  background-color: #E5EED6;
 }*/
 
 .history-title {

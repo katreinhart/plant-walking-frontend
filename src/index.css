@@ -219,10 +219,18 @@ hr {
   align-items: center;
 }
 
-.save-button {
+.green-button {
   background-color: #7F9847;
   color: #F2F4EC;
   transition: 0.5s;
+}
+
+.green-button:hover {
+  background-color: #8CA650;
+}
+
+.green-button:active {
+  background-color: #768F3E;
 }
 
 .delete {
@@ -246,20 +254,16 @@ hr {
   margin-top: auto;
 }
 
-.save-button:hover {
-  background-color: #8CA650;
-}
-
-.save-button:active {
-  background-color: #768F3E;
-}
-
 .delete:hover {
   background-color: #F8E5EE;
 }
 
 .delete:active {
   background-color: #F2CCDD;
+}
+
+#date {
+  margin-top: 2em;
 }
 
 /*=====HISTORY VIEW=====*/

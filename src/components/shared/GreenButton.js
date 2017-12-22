@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 
 const GreenButton = ({ text }) => {
   return (
     <button className="button green-button">
-      { text }</button>
+      { text }
+    </button>
   )
 }
 

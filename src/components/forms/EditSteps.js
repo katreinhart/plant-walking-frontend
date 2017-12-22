@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import Navigation from './Navigation'
-import CloseForm from './CloseForm'
-import TextInput from './TextInput'
-import GreenButton from './GreenButton'
+import Navigation from '../shared/Navigation'
+import CloseForm from '../shared/CloseForm'
+import TextInput from '../shared/TextInput'
+import GreenButton from '../shared/GreenButton'
 
 class EditSteps extends Component {
   state = {}

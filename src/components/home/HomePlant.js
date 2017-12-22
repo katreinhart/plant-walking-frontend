@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 // import './App.css';
-import Navigation from './Navigation'
+import Navigation from '../shared/Navigation'
 import PlantContainer from './PlantContainer'
 import ProgressBar from './ProgressBar'
 import AddStepsContainer from './AddStepsContainer'
-import ViewGarden from './ViewGarden'
-import PastPlantDetails from './PastPlantDetails'
-import CloseForm from './CloseForm'
+import ViewGarden from '../garden/ViewGarden'
+import PastPlantDetails from '../pastplant/PastPlantDetails'
+import CloseForm from '../shared/CloseForm'
+import axios from 'axios'
 
 class HomePlant extends Component {
   constructor(props) {
-    super(props) 
+    super(props)
     this.state = {
       currentSteps: 0,
     }
@@ -20,9 +21,13 @@ class HomePlant extends Component {
 
   addSteps (e) {
     e.preventDefault()
-    const input = e.target.querySelector('.add-steps-input')
-    const stepsAdded = input.value
+    const input = e.target.querySelector('.input-field')
+    const stepsAdded = parseInt(input.value)
     input.value = ''
+    axios.post('http://localhost:2999/api/steps',{
+      user_id: 1,
+      number_of_steps: stepsAdded
+    })
     this.setState({ currentSteps: this.state.currentSteps + parseInt(stepsAdded, 10) })
   }
 

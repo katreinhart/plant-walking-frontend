@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import Garden from './components/Garden'
-import HomePlant from './components/HomePlant'
-import Menu from './components/Menu'
-import History from './components/History'
-import EditSteps from './components/EditSteps'
-import SignUp from './components/SignUp'
-import LogIn from './components/LogIn'
-import Welcome from './components/Welcome'
+import Garden from './components/garden/Garden'
+import HomePlant from './components/home/HomePlant'
+import Menu from './components/menu/Menu'
+import History from './components/history/History'
+import EditSteps from './components/forms/EditSteps'
+import SignUp from './components/welcome/SignUp'
+import LogIn from './components/welcome/LogIn'
+import Welcome from './components/welcome/Welcome'
 
 class App extends Component {
 

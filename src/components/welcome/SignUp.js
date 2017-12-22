@@ -28,13 +28,11 @@ class SignUp extends Component {
   }
 
   handleEmailChange(e) {
-    let val = e.target.value
-    this.setState({ email: val })
+    this.setState({ email: e.target.value })
   }
 
   handlePasswordChange(e) {
-    let val = e.target.value
-    this.setState({ password: val })
+    this.setState({ password: e.target.value })
   }
 
   render() {
@@ -43,7 +41,7 @@ class SignUp extends Component {
         <CloseForm title="Sign Up"/>
         <form onSubmit={ this.handleSignUp }>
           <TextInputLabeled label="e-mail" onChange={ this.handleEmailChange }/>
-          <TextInputLabeled role='password' label="password" onChange={ this.handlePasswordChange }/>
+          <TextInputLabeled role="password" label="password" onChange={ this.handlePasswordChange }/>
           <div className="buttons-container">
             <GreenButton text="sign up" htmlFor='submit'/>
           </div>

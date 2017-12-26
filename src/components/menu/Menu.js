@@ -2,7 +2,12 @@ import React from 'react'
 import MenuItem from './MenuItem'
 import Navigation from '../shared/Navigation'
 
-const menuStuff = ['home', 'back', 'menu thing 3']
+const menuStuff = [
+  {id: 0, name: 'Profile', path: '/profile'}, 
+  {id: 1, name:'History', path:'/history'}, 
+  {id: 2, name:'Current Plant', path:'/'}, 
+  {id: 3, name:'Garden', path:'/garden'}
+]
 
 const Menu = () => (
   <div className="outermost-container">
@@ -14,7 +19,7 @@ const Menu = () => (
       <div className="history-list-container">
         <hr></hr>
 
-        {menuStuff.map(item => <MenuItem name={item} />)}
+        {menuStuff.map(item => <MenuItem key={ item.id } name={ item.name } link={ item.path }/>)}
 
       </div>
     </div>

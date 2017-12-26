@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { Link } from 'react-router-dom'
 import Navigation from '../shared/Navigation'
-import CloseForm from '../CloseForm'
+import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
 
@@ -24,7 +24,7 @@ class SignUp extends Component {
   async handleSignUp (e) {
     e.preventDefault()
     const { email, password } = this.state
-    const response = await axios.post(`${localhostUrl}/register`, { email, password }) 
+    const response = await axios.post(`${localhostUrl}/register`, { email, password })
   }
 
   handleEmailChange(e) {

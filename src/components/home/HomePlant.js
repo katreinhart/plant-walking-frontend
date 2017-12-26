@@ -6,8 +6,8 @@ import PlantContainer from './PlantContainer'
 import ProgressBar from './ProgressBar'
 import AddStepsContainer from './AddStepsContainer'
 import ViewGarden from '../garden/ViewGarden'
-import PastPlantDetails from '../PastPlantDetails'
-import CloseForm from '../CloseForm'
+import PastPlantDetails from '../pastplant/PastPlantDetails'
+import CloseForm from '../shared/CloseForm'
 import axios from 'axios'
 
 class HomePlant extends Component {

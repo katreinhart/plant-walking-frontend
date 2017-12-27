@@ -9,6 +9,7 @@ import EditSteps from './components/forms/EditSteps'
 import SignUp from './components/welcome/SignUp'
 import LogIn from './components/welcome/LogIn'
 import Welcome from './components/welcome/Welcome'
+import PickSeed from './components/forms/PickSeed'
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
           <Route path='/signup' component={ SignUp } />
           <Route path='/login' component={ LogIn } />
           <Route path='/welcome' component={ Welcome } />
+          <Route path='/pickseed' component={ PickSeed } />
         </div>
       </Router>
     );

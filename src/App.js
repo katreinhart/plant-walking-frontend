@@ -6,6 +6,7 @@ import HomePlant from './components/home/HomePlant'
 import Menu from './components/menu/Menu'
 import History from './components/history/History'
 import EditSteps from './components/forms/EditSteps'
+import DeleteSteps from './components/forms/DeleteSteps'
 import SignUp from './components/welcome/SignUp'
 import LogIn from './components/welcome/LogIn'
 import Welcome from './components/welcome/Welcome'
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path='/menu' component={ Menu } />
           <Route path='/history' component={ History } />
           <Route path='/editsteps' component={ EditSteps } />
+          <Route path='/deletesteps' component={ DeleteSteps } />
           <Route path='/signup' component={ SignUp } />
           <Route path='/login' component={ LogIn } />
           <Route path='/welcome' component={ Welcome } />

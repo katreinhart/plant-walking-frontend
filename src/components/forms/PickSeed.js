@@ -9,7 +9,6 @@ class PickSeed extends Component {
   render() {
     return (
       <div className="outermost-container">
-        <Navigation />
         <CloseForm title="Pick New Seed"/>
         <PlantContainer />
         <div className="new-plant-details text-ctr mt-2">

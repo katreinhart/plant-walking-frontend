@@ -7,7 +7,9 @@ const ProgressBar = ({ percent }) => {
   return (
     <div>
       <div className="topsoil-line"></div>
-      <div className ="progress-bar" style={ style }>
+      <div className="progress-background">
+        <div className ="progress-bar" style={ style }>
+        </div>
       </div>
     </div>
   )

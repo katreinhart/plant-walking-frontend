@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Navigation from '../shared/Navigation'
-import CloseForm from '../shared/CloseForm'
-import TextInputLabeled from '../shared/TextInputLabeled'
+// import Navigation from '../shared/Navigation'
+// import CloseForm from '../shared/CloseForm'
+// import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
 
 class Welcome extends Component {

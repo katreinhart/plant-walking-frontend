@@ -11,6 +11,7 @@ import SignUp from './components/welcome/SignUp'
 import LogIn from './components/welcome/LogIn'
 import Welcome from './components/welcome/Welcome'
 import PickSeed from './components/forms/PickSeed'
+import Profile from './components/profile/Profile'
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path='/login' component={ LogIn } />
           <Route path='/welcome' component={ Welcome } />
           <Route path='/pickseed' component={ PickSeed } />
+          <Route path='/profile' component={ Profile } />
         </div>
       </Router>
     );

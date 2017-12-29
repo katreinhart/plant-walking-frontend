@@ -1,0 +1,12 @@
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.splash-image {
+  display: flex;
+  margin: 1em auto;
+  max-height: 300px;
+  padding: 3em;
+}

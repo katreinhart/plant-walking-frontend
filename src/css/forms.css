@@ -1,0 +1,74 @@
+.close-form {
+  display: flex;
+  padding: 1em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-x {
+  text-align: right;
+}
+
+.title {
+  color: #7F9847;
+  margin: 0em;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+.green-button {
+  background-color: #7F9847;
+  color: #F2F4EC;
+  transition: 0.5s;
+}
+
+.green-button:hover {
+  background-color: #8CA650;
+}
+
+.green-button:active {
+  background-color: #768F3E;
+}
+
+.delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1em;
+  width: 100%;
+  cursor: pointer;
+}
+
+.delete > p, .delete > .material-icons {
+  color: #C00156;
+}
+
+.delete > p {
+  margin-right: 0.5em;
+}
+
+.buttons-container {
+  margin-top: auto;
+}
+
+.delete:hover {
+  background-color: #F8E5EE;
+}
+
+.delete:active {
+  background-color: #F2CCDD;
+}
+
+#date {
+  margin-top: 2em;
+}
+
+.input-label {
+  margin: 1em auto 0em 0em;
+  text-transform: uppercase;
+}
+
+/*===PICK NEW SEED FORM===*/
+.new-plant-steps {
+  text-transform: uppercase;
+}

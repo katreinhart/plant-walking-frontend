@@ -1,0 +1,16 @@
+.garden-row {
+  display: flex;
+}
+
+.garden-plant-box {
+  background-color: #E8F2F8;
+  width: 100vw;
+  height: 25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.odd-plant-row:nth-child(odd), .even-plant-row:nth-child(even) {
+  background-color: #D5E7F2;
+}

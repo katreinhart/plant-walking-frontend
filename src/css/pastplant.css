@@ -1,0 +1,8 @@
+.past-plant-soil {
+  background-color: #6F3A38;
+  color: #f3d9d8;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 40%;
+}

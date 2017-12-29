@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const MenuItem = ({ name }) => {
+const MenuItem = ({ name, link }) => {
   return (
     <div>
-      <div className="history-item">
+      <Link className="history-item" to={ link }>
         <p className="history-column">{ name }</p>
-      </div>
+      </Link>
       <hr></hr>
     </div>
   )

@@ -43,6 +43,10 @@ h3 {
   font-size: 1.2em;
 }
 
+.material-icons {
+  font-size: 30px;
+}
+
 hr {
   border: 1px solid #EEEEEE;
   margin: 0em;

@@ -30,7 +30,7 @@ class HomePlant extends Component {
     // currently hardcoding the plant_instance id as 1
     axios.get('http://localhost:2999/api/plant-instances/1')
     .then( progress => {
-      console.log('dingus', progress);
+      console.log('updateProgressState', progress);
       // setTimeout( console.log('timer'), this.setState({progress: progress.data.response[0].progress}), 1000 )
       this.setState({progress: progress.data.response[0].progress})
     })
@@ -48,7 +48,7 @@ class HomePlant extends Component {
       number_of_steps: stepsAdded
     })
     .then(el => {
-      console.log('honky', el);
+      // console.log('addSteps', el);
         this.updateProgressState()
     })
 

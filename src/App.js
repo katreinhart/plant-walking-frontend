@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import axios from 'axios'
 import Garden from './components/garden/Garden'
 import HomePlant from './components/home/HomePlant'
 import Menu from './components/menu/Menu'
@@ -14,7 +14,6 @@ import PickSeed from './components/forms/PickSeed'
 import Profile from './components/profile/Profile'
 
 class App extends Component {
-
   render() {
     return (
       <Router>

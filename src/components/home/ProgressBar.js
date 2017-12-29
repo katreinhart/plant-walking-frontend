@@ -1,9 +1,10 @@
 import React from 'react'
-
+import axios from 'axios'
 const ProgressBar = ({ percent }) => {
   const style = {
     width: `${percent}%`
   }
+  console.log(percent);
   return (
     <div>
       <div className="topsoil-line"></div>

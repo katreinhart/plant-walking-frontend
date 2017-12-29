@@ -1,0 +1,101 @@
+.plant-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.plant-image {
+  align-self: flex-end;
+}
+
+.carousel-arrow {
+  padding: 6em 0.5em;
+  cursor: pointer;
+}
+
+.topsoil-line {
+  background-color: #432221;
+  height: 0.2em;
+}
+
+.progress-bar {
+  height: 1em;
+  background-color: #8E4946;
+}
+
+.progress-background {
+  background-color: #C5B0B0;
+}
+
+.buttons-container,
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+  margin: 1em auto 1em;
+  align-items: center;
+  width: 90%;
+}
+
+.input-field,
+.button {
+  min-height: 50px;
+  width: 100%;
+  margin: 8px;
+  font-size: 1.2em;
+  text-align: center;
+  border: none;
+}
+
+.input-field {
+  color: #576930;
+  background-color: #EFF4E7;
+  transition: 0.5s;
+}
+
+.input-field:hover {
+  background-color: #eff7e3;
+}
+
+.button {
+  text-transform: uppercase;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.add-steps-button {
+  color: #ffcfe4;
+  background-color: #C00156;
+}
+
+.add-steps-button:hover {
+  background-color: #D70172;
+}
+
+.add-steps-button:active {
+  background-color: #C00156;
+}
+
+.view-garden-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 1em 1em 1em;
+}
+
+.back-to-plant-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em 1em auto 1em;
+}
+
+
+@media(min-width: 528px){
+  .add-steps-container {
+    margin: 1em auto;
+  }
+
+}

@@ -1,0 +1,38 @@
+.history-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #7F9847;
+  padding: 0.25em;
+  transition: 0.5s;
+}
+
+
+.history-item:hover{
+  background-color: #EFF4E7;
+}
+
+.history-item:active{
+  background-color: #E5EED6;
+}
+
+.history-title {
+  color: #7F9847;
+}
+
+.history-column {
+  width: 33%;
+}
+
+.edit-steps{
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.edit-steps:hover{
+  color: #94AD5B;
+}
+
+.edit-steps:active{
+  color: #71883C;
+}

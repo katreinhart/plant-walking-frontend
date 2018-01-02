@@ -31,7 +31,7 @@ class HomePlant extends Component {
     axios.get('http://localhost:2999/api/plant-instances/1')
     .then( progress => {
       console.log('updateProgressState', progress);
-      // setTimeout( console.log('timer'), this.setState({progress: progress.data.response[0].progress}), 1000 )
+
       this.setState({progress: progress.data.response[0].progress})
     })
   }
@@ -57,7 +57,7 @@ class HomePlant extends Component {
   }
 
   render() {
-    {console.log('hey Render fucker');}
+    {console.log('hey Render');}
     return (
       <div className="outermost-container">
         <Navigation />

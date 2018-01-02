@@ -31,6 +31,7 @@ class Login extends Component {
     const { email, password } = this.state
     const response = await axios.post(`${localhostUrl}/login`, {email, password})
     if(response){
+      console.log('response:',response);
       let token= JSON.stringify(response.data.token)
       localStorage.setItem('token', token)
     }

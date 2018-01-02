@@ -59,6 +59,10 @@
   background-color: #F2CCDD;
 }
 
+.error {
+  color: #C00156;
+}
+
 #date {
   margin-top: 2em;
 }
@@ -71,4 +75,11 @@
 /*===PICK NEW SEED FORM===*/
 .new-plant-steps {
   text-transform: uppercase;
+}
+
+.signup-success {
+  margin-left: 1em;
+  margin-top: 1em;
+  
+  color: #768F3E;
 }

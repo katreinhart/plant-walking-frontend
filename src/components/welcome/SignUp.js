@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Navigation from '../shared/Navigation'
 import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
@@ -25,6 +25,11 @@ class SignUp extends Component {
     e.preventDefault()
     const { email, password } = this.state
     const response = await axios.post(`${localhostUrl}/register`, { email, password })
+    if(response.data.message && response.data.message === 'User created') {
+      window.location.href = '/login'
+    } else {
+      console.log('There was an error creating the user')
+    }
   }
 
   handleEmailChange(e) {

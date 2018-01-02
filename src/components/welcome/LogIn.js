@@ -28,22 +28,18 @@ class Login extends Component {
 
   async handleSignin(e) {
     e.preventDefault()
-    console.log('yayaya');
+
     const { email, password } = this.state
-    try{
-    const response = await axios.post(`${localhostUrl}/login`, {email, password})
-    // if(response && response.data.token){
-    //   console.log('response:', response);
-      let token = JSON.stringify(response.data.token)
+    try {
+      const response = await axios.post(`${localhostUrl}/login`, {email, password})
+      let { token } = response.data
       localStorage.setItem('token', token)
       window.location.href = '/'
     }
     catch(error){
       console.log( 'errors', error);
       this.setState({isError:true})
-
     }
-
   }
 
   render() {

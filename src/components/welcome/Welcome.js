@@ -14,8 +14,12 @@ class Welcome extends Component {
         <img className="splash-image" src="./images/grown_plant.png" />
 
         <div className="buttons-container">
-          <GreenButton text="sign up"/>
-          <GreenButton text="log in"/>
+          <Link to='/signup'>
+            <GreenButton text="sign up"/>
+          </Link>
+          <Link to='/login'>
+            <GreenButton text="log in"/>
+          </Link>
         </div>
       </div>
     )

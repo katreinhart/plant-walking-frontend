@@ -47,7 +47,7 @@ class Login extends Component {
         { successFlag ? <div className='signup-success'>Signup successful! Please log in.</div> : ''}
         <form onSubmit={this.handleSignin}>
         <TextInputLabeled label="e-mail" onChange={ this.handleEmail }/>
-        <TextInputLabeled label="password" onChange={ this.handlePassword }/>
+        <TextInputLabeled role="password" label="password" onChange={ this.handlePassword }/>
         <div className="buttons-container">
           <GreenButton text="log in"/>
         </div>

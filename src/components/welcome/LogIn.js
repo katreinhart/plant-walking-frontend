@@ -36,6 +36,7 @@ class Login extends Component {
     //   console.log('response:', response);
       let token = JSON.stringify(response.data.token)
       localStorage.setItem('token', token)
+      window.location.href = '/'
     }
     catch(error){
       console.log( 'errors', error);
@@ -46,12 +47,16 @@ class Login extends Component {
   }
 
   render() {
+    const successFlag = window.localStorage.getItem('signupsuccess')
+    window.localStorage.removeItem('signupsuccess')
+
     return (
       <div className="outermost-container">
         <CloseForm title="Log In"/>
+        { successFlag ? <div className='signup-success'>Signup successful! Please log in.</div> : ''}
         <form onSubmit={this.handleSignin}>
         <TextInputLabeled label="e-mail" onChange={ this.handleEmail }/>
-        <TextInputLabeled label="password" onChange={ this.handlePassword }/>
+        <TextInputLabeled role="password" label="password" onChange={ this.handlePassword }/>
         <div className="buttons-container">
           <GreenButton text="log in"/>
           { this.state.isError ? <div style={{color:'red'}}>Invalid email or password</div>: false }

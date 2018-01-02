@@ -4,7 +4,7 @@ const ProgressBar = ({ percent }) => {
   const style = {
     width: `${percent}%`
   }
-  console.log(percent);
+  
   return (
     <div>
       <div className="topsoil-line"></div>

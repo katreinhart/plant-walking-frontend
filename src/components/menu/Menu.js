@@ -3,10 +3,11 @@ import MenuItem from './MenuItem'
 import Navigation from '../shared/Navigation'
 
 const menuStuff = [
-  {id: 0, name: 'Profile', path: '/profile'}, 
-  {id: 1, name:'History', path:'/history'}, 
+  {id: 0, name: 'Profile',      path: '/profile'}, 
+  {id: 1, name:'History',       path:'/history'}, 
   {id: 2, name:'Current Plant', path:'/'}, 
-  {id: 3, name:'Garden', path:'/garden'}
+  {id: 3, name:'Garden',        path:'/garden'},
+  {id: 4, name:'Logout',        path:'/logout'},
 ]
 
 const Menu = () => (

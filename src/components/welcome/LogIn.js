@@ -12,7 +12,8 @@ class Login extends Component {
     super()
     this.state={
       email: '',
-      password:''
+      password:'',
+      isError: false
     }
     this.handleSignin = this.handleSignin.bind(this)
   }
@@ -29,11 +30,17 @@ class Login extends Component {
     e.preventDefault()
     console.log('yayaya');
     const { email, password } = this.state
+    try{
     const response = await axios.post(`${localhostUrl}/login`, {email, password})
-    if(response){
-      console.log('response:',response);
-      let token= JSON.stringify(response.data.token)
+    // if(response && response.data.token){
+    //   console.log('response:', response);
+      let token = JSON.stringify(response.data.token)
       localStorage.setItem('token', token)
+    }
+    catch(error){
+      console.log( 'errors', error);
+      this.setState({isError:true})
+
     }
 
   }
@@ -47,6 +54,7 @@ class Login extends Component {
         <TextInputLabeled label="password" onChange={ this.handlePassword }/>
         <div className="buttons-container">
           <GreenButton text="log in"/>
+          { this.state.isError ? <div style={{color:'red'}}>Invalid email or password</div>: false }
         </div>
       </form>
       </div>

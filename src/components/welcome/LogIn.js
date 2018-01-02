@@ -33,6 +33,7 @@ class Login extends Component {
     if(response){
       let token= JSON.stringify(response.data.token)
       localStorage.setItem('token', token)
+      window.location.href = '/'
     }
 
   }

@@ -21,43 +21,33 @@ class HomePlant extends Component {
   }
 
   componentDidMount(){
-    console.log('mount');
     this.updateProgressState()
   }
 
-  updateProgressState(){
-    // set current progress
-    // currently hardcoding the plant_instance id as 1
-    axios.get('http://localhost:2999/api/plant-instances/1')
-    .then( progress => {
-      console.log('updateProgressState', progress);
-      // setTimeout( console.log('timer'), this.setState({progress: progress.data.response[0].progress}), 1000 )
-      this.setState({progress: progress.data.response[0].progress})
-    })
+  async updateProgressState() {
+    const progress = await axios.get('http://localhost:2999/api/plant-instances/1')
+    console.log('updateProgressState', progress)
+    console.log(progress.data.response[0].progress)
+    await this.setState({progress: progress.data.response[0].progress})
+    console.log('current progress state', this.state.progress)
   }
 
-  addSteps (e) {
+  async addSteps(e) {
     e.preventDefault()
     const input = e.target.querySelector('.input-field')
     const stepsAdded = parseInt(input.value)
     input.value = ''
 
     //hardcoding user_id
-    axios.post('http://localhost:2999/api/steps',{
+    const response = await axios.post('http://localhost:2999/api/steps',{
       user_id: 1,
       number_of_steps: stepsAdded
     })
-    .then(el => {
-      // console.log('addSteps', el);
-        this.updateProgressState()
-    })
-
-    // this.setState({ currentSteps: this.state.currentSteps + parseInt(stepsAdded, 10)})
-
+    console.log(response)
+    await this.updateProgressState()
   }
 
   render() {
-    {console.log('hey Render fucker');}
     return (
       <div className="outermost-container">
         <Navigation />

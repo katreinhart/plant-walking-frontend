@@ -32,7 +32,6 @@ class SignUp extends Component {
     } catch(error) {
       console.log('There was an error creating the user')
       this.setState({isError: true})
-      // update DOM to reflect error status
     }
   }
 

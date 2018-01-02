@@ -45,7 +45,7 @@ class Login extends Component {
       <div className="outermost-container">
         <CloseForm title="Log In"/>
         { successFlag ? <div className='signup-success'>Signup successful! Please log in.</div> : ''}
-        <form onSubmit={this.handleSignin}>
+        <form onSubmit={ this.handleSignin }>
         <TextInputLabeled label="e-mail" onChange={ this.handleEmail }/>
         <TextInputLabeled role="password" label="password" onChange={ this.handlePassword }/>
         <div className="buttons-container">

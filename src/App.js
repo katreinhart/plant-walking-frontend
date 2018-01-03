@@ -47,8 +47,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.getUserInformation()
     this.updateProgressState()
+    this.getUserInformation()
   }
 
   async handleAddSteps(e) {
@@ -75,7 +75,7 @@ class App extends Component {
     
     try {
       const response = await axios.post(`${localhostURL}/users/login`, body)
-      
+      console.log(response.data)
       let { 
         token,
         email,
@@ -86,7 +86,9 @@ class App extends Component {
       } = response.data
 
       localStorage.setItem('token', token)
-      window.isAuthenticated = true
+      window.isAuthenticated = true 
+      localStorage.setItem('user_id', user_id)
+
 
       const prevState = Object.assign({}, this.state)
 
@@ -111,8 +113,8 @@ class App extends Component {
       console.log( 'errors', error);
       const prevState = Object.assign({}, this.state)
       this.setState({
-        ...prevState,
         loginError: true,
+        authenticated: false,
       })
     }
   }
@@ -141,7 +143,6 @@ class App extends Component {
     const prevState = Object.assign({}, this.state)
 
     this.setState({
-      ...prevState,
       currentPlant: {
         plant_instance_id,
         plant_types_id,
@@ -171,7 +172,9 @@ class App extends Component {
 
   async getUserInformation() {
     // use to retrieve current user info (email, id, current plant id)
-
+    const userId = localStorage.getItem('user_id')
+    const response = await axios.get(`${localhostURL}/user-profiles/${userId}`)
+    console.log(response)
   }
 
   render() {
@@ -213,9 +216,9 @@ class App extends Component {
 
 const LogOut = () => {
   window.isAuthenticated = false
+  localStorage.removeItem('user_id')
   localStorage.removeItem('token')
   localStorage.removeItem('logged_in')
-
 
   return (
     <Redirect to={{

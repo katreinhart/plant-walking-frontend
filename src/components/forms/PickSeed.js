@@ -13,7 +13,7 @@ const localhostURL = 'http://localhost:2999/api'
 
 class PickSeed extends Component {
   constructor() {
-    super() 
+    super()
     this.state = {
       plants: []
     }
@@ -22,8 +22,8 @@ class PickSeed extends Component {
   }
 
   componentDidMount() {
-    this.retrievePlantTypes() 
-    console.log(this.state.plants)
+    this.retrievePlantTypes()
+    // console.log(this.state.plants)
   }
 
   async retrievePlantTypes() {
@@ -44,24 +44,24 @@ class PickSeed extends Component {
   }
 
   render() {
-    console.log(this.props.currentPlantID)
+    // console.log(this.props.currentPlantID)
     if(this.props.currentPlantID) {
       // don't display pick seed if user has a plant
-      return (<Redirect to='/' />) 
-    } else 
+      return (<Redirect to='/' />)
+    } else
     return (
       <div className="outermost-container">
         <CloseForm title="Pick New Seed"/>
-        <Carousel ref="carousel" 
-          decorators={ CarouselDecorator } 
-          wrapAround 
-          dragging 
-          initialSlideHeight={800} 
+        <Carousel ref="carousel"
+          decorators={ CarouselDecorator }
+          wrapAround
+          dragging
+          initialSlideHeight={800}
           style={{'height': '80%'}}
         >
           {
             this.state.plants.map(plant => (
-              <SeedChoice 
+              <SeedChoice
                 key={plant.id}
                 id={plant.id}
                 name={plant.name}

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Link, Redirect, withRouter } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
 
-const LogIn = withRouter(({ history, onSignIn }) => {
+const LogIn = (({ onSignIn }) => {
 
   if(window.isAuthenticated) {
     return (

@@ -22,4 +22,3 @@ const HomePlant = ({ plant_id, plant_name, steps_required, steps_recorded, addSt
 }
  
 export default HomePlant
-

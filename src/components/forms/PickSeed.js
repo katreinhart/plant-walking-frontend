@@ -16,8 +16,8 @@ class PickSeed extends Component {
     this.state = {
       plants: []
     }
-    this.handleNext = this.handleNext.bind(this)
-    this.handlePrev = this.handlePrev.bind(this)
+    this.handleNext   = this.handleNext.bind(this)
+    this.handlePrev   = this.handlePrev.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
   }
 
@@ -27,7 +27,6 @@ class PickSeed extends Component {
 
   async retrievePlantTypes() {
     const response = await axios.get(`${localhostURL}/plant-types`)
-    console.log(response)
     this.setState({
       plants: response.data.plants
     })
@@ -85,7 +84,7 @@ const SeedChoice = ({ id, name, steps_required, handleNext, handlePrev, handleSe
       <h3 className="new-plant-name">{ name }</h3>
       <p className="new-plant-steps">{ steps_required } steps</p>
     </div>
-    <div className="buttons-container">
+    <div className="buttons-container" style={{minHeight: '100px'}}>
       <GreenButton text="Pick This Seed!" clickHandler={ handleSelect } id={ id } />
     </div>
   </div>

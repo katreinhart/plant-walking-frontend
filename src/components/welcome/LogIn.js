@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import CloseForm from '../shared/CloseForm'
@@ -13,9 +14,16 @@ class Login extends Component {
     this.state={
       email: '',
       password:'',
-      isError: false
+      isError: false,
+      success: false
     }
     this.handleSignin = this.handleSignin.bind(this)
+  }
+
+  componentDidMount() {
+    const successFlag = window.localStorage.getItem('signupsuccess')
+    if(successFlag) this.setState({success: true })
+    window.localStorage.removeItem('signupsuccess')
   }
 
   handleEmail = (e) => {
@@ -43,22 +51,20 @@ class Login extends Component {
   }
 
   render() {
-    const successFlag = window.localStorage.getItem('signupsuccess')
-
-    window.localStorage.removeItem('signupsuccess')
 
     return (
       <div className="outermost-container">
         <CloseForm title="Log In"/>
-        { successFlag ? <div className='signup-success'>Signup successful! Please log in.</div> : ''}
+        { this.state.success ? <div className='signup-success'>Signup successful! Please log in.</div> : ''}
         <form onSubmit={ this.handleSignin }>
-        <TextInputLabeled label="e-mail" onChange={ this.handleEmail }/>
-        <TextInputLabeled role="password" label="password" onChange={ this.handlePassword }/>
-        <div className="buttons-container">
-          <GreenButton text="log in"/>
-          { this.state.isError ? <div style={{color:'red'}}>Invalid email or password</div>: false }
-        </div>
-      </form>
+          <TextInputLabeled label="e-mail" onChange={ this.handleEmail }/>
+          <TextInputLabeled role="password" label="password" onChange={ this.handlePassword }/>
+          <div className="buttons-container">
+            <GreenButton text="log in"/>
+            { this.state.isError ? <div style={{color:'red'}}>Invalid email or password</div>: false }
+          </div>
+        </form>
+        <Link to='/signup'>Need to register? Click here!</Link>
       </div>
     )
   }

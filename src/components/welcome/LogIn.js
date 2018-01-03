@@ -6,18 +6,18 @@ import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
 
-const localhostUrl = 'http://localhost:2999/api/users'
+// const localhostURL = 'http://localhost:2999/api/'
 
 class Login extends Component {
-  constructor (){
-    super()
+  constructor (props){
+    super(props)
     this.state={
       email: '',
       password:'',
       isError: false,
       success: false
     }
-    this.handleSignin = this.handleSignin.bind(this)
+    this.handleSignIn = this.handleSignIn.bind(this)
   }
 
   componentDidMount() {
@@ -34,19 +34,15 @@ class Login extends Component {
     this.setState({password: e.target.value})
   }
 
-  async handleSignin(e) {
+  async handleSignIn(e) {
     e.preventDefault()
+    console.log('handle signin function login.js')
 
     const { email, password } = this.state
     try {
-      const response = await axios.post(`${localhostUrl}/login`, {email, password})
-      let { token } = response.data
-      localStorage.setItem('token', token)
-      window.location.href = '/'
-    }
-    catch(error){
-      console.log( 'errors', error);
-      this.setState({isError:true})
+      const result = await this.props.onSignIn({email, password})
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -56,11 +52,11 @@ class Login extends Component {
       <div className="outermost-container">
         <CloseForm title="Log In"/>
         { this.state.success ? <div className='signup-success'>Signup successful! Please log in.</div> : ''}
-        <form onSubmit={ this.handleSignin }>
+        <form onSubmit={ this.handleSignIn }>
           <TextInputLabeled label="e-mail" onChange={ this.handleEmail }/>
           <TextInputLabeled role="password" label="password" onChange={ this.handlePassword }/>
           <div className="buttons-container">
-            <GreenButton text="log in"/>
+            <GreenButton text="log in" />
             { this.state.isError ? <div style={{color:'red'}}>Invalid email or password</div>: false }
           </div>
         </form>

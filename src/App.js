@@ -38,6 +38,7 @@ class App extends Component {
 
     this.updateProgressState = this.updateProgressState.bind(this)
     this.handleAddSteps = this.handleAddSteps.bind(this)
+    this.handleSignIn = this.handleSignIn.bind(this)
   }
 
   componentDidMount() {
@@ -57,6 +58,20 @@ class App extends Component {
     }
     const response = await axios.post(`${localhostURL}/steps`, body)
     this.updateProgressState()
+  }
+
+  async handleSignIn({email, password}) {
+
+    try {
+      const response = await axios.post(`${localhostURL}/users/login`, {email, password})
+      let { token } = response.data
+      localStorage.setItem('token', token)
+      window.location.href = '/'
+    }
+    catch(error){
+      console.log( 'errors', error);
+      return({isError:true})
+    }
   }
 
   async updateProgressState() {
@@ -89,7 +104,11 @@ class App extends Component {
             steps_required={this.state.currentPlant.steps_required}
           />
           <Route path='/signup' render={() => <SignUp />} />
-          <Route path='/login' component={ LogIn } />
+          <Route path='/login'
+            render={(routeProps) => (<LogIn {...routeProps}
+              onSignIn={ this.handleSignIn }
+            />)}
+          />
           <Route path='/welcome' component={ Welcome } />
 
           <PrivateRoute path='/garden' component={ Garden } />
@@ -120,7 +139,7 @@ const LogOut = () => {
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     window.logged_in ? (
-      <Component {...props}{...rest} />
+      <Component {...props} {...rest} />
     ) : (
       <Redirect to={{
         pathname: '/welcome',

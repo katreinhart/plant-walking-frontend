@@ -32,7 +32,10 @@ class App extends Component {
     this.state = {
       authenticated: !!token,
       token: token,
-      currentUser: {},
+      currentUser: {
+        email: '',
+        user_id: ''
+      },
       currentPlant: {}
     }
 
@@ -64,9 +67,22 @@ class App extends Component {
 
     try {
       const response = await axios.post(`${localhostURL}/users/login`, {email, password})
+      console.log(response.data)
       let { token } = response.data
       localStorage.setItem('token', token)
-      window.location.href = '/'
+      this.setState({
+        authenticated: true,
+        currentUser: {
+          email: response.data.email,
+          user_id: response.data.userId
+        },
+        currentPlant: {
+          plantInstanceId: response.data.plantInstanceId,
+          plant_types_id: response.data.plant_types_id,
+          progress: response.data.progress,
+        }
+      })
+      // redirect to home page
     }
     catch(error){
       console.log( 'errors', error);
@@ -79,16 +95,14 @@ class App extends Component {
     const { user_id, plant_types_id, progress, id: plant_instance_id } = response.data.plant_instance
     const { data: { plant: { steps_required } }} = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
 
+    const prevState = Object.assign({}, this.state)
     this.setState({
-      currentUser: {
-        user_id,
-      },
       currentPlant: {
         plant_instance_id,
         plant_types_id,
         progress,
         steps_required,
-      }
+      }, ...prevState
     })
   }
 

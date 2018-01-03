@@ -46,6 +46,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // this.getUserInformation()
     this.updateProgressState()
   }
 
@@ -137,13 +138,22 @@ class App extends Component {
     e.preventDefault()
     console.log('You have chosen plant number', e.target.id)
     const selectedPlantId = parseInt(e.target.id, 10)
-    // make axios request to update selected plant id for user 
-    // set plant_types_id to selectedPlantId
-    // reset progress to zero
+    const userId = this.state.currentUser.userId
+
+    this.updateSelectedPlantInfo({ userId, selectedPlantId })
   }
 
-  async updateUserInfo({ email, password }) {
-    // 
+  async updateUserInfo({ email, displayName, password }) {
+    // change a user's display name or password (STRETCH)
+  }
+
+  async updateSelectedPlantInfo({ userId, plantyTypeId }) {
+    // make db call to update user's current plant to the new plant type specified
+
+  }
+
+  async getUserInformation() {
+    // use to retrieve current user info (email, id, current plant id)
   }
 
   render() {

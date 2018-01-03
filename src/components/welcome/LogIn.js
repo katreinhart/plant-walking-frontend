@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Link, Redirect, withRouter } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
 
-const LogIn = withRouter(({ history, onSignIn }) => {
+const LogIn = (({ onSignIn, loginError }) => {
 
   if(window.isAuthenticated) {
     return (
@@ -16,10 +16,10 @@ const LogIn = withRouter(({ history, onSignIn }) => {
     return (
       <div className="outermost-container">
         <CloseForm title="Log In"/>
-        
         <form onSubmit={ onSignIn }>
           <TextInputLabeled role="text" label="email"/>
           <TextInputLabeled role="password" label="password" />
+          { loginError ? <div className="error">There was an error logging you in. Please check your inputs and try again.</div> : '' }
           <div className="buttons-container">
             <GreenButton text="log in" />
           </div>
@@ -30,4 +30,4 @@ const LogIn = withRouter(({ history, onSignIn }) => {
   }
 })
 
-export default LogIn;
+export default LogIn

@@ -61,6 +61,8 @@
 
 .error {
   color: #C00156;
+  margin: 1em;
+  padding-left: 0.25em;
 }
 
 #date {

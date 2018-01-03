@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import GardenPlant from './GardenPlant.js'
 import { Link } from 'react-router-dom'
 import Navigation from '../shared/Navigation'
 import BackToPlant from './BackToPlant'

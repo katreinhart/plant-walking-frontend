@@ -4,8 +4,18 @@ import Navigation from '../shared/Navigation'
 import BackToPlant from './BackToPlant'
 
 class Garden extends Component {
-  state = {}
+  constructor(props){
+      super(props)
+      this.state =  { completedPlants:[] }
+  }
+
+
+
+  componentDidMount(){
+    console.log(this.props.user_id);
+  }
   render() {
+
     return (
       <div className="outermost-container">
         <Navigation />

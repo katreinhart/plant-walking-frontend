@@ -164,6 +164,10 @@ class App extends Component {
 
   }
 
+  sayHi(){
+    console.log('Hi');
+  }
+
   render() {
     return (
       <Router>
@@ -184,7 +188,7 @@ class App extends Component {
           />
           <Route path='/welcome' component={ Welcome } />
 
-          <PrivateRoute path='/garden' component={ Garden } />
+          <PrivateRoute path='/garden' component={ Garden } user_id={this.state.currentUser.user_id}/>
           <PrivateRoute path='/menu' component={ Menu } />
           <PrivateRoute path='/history' component={ History } />
           <PrivateRoute path='/editsteps' component={ EditSteps } />

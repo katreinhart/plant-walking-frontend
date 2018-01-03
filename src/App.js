@@ -55,9 +55,7 @@ class App extends Component {
       user_id: 2,
       number_of_steps: stepsAdded
     }
-    console.log(body)
     const response = await axios.post(`${localhostURL}/steps`, body)
-    console.log(response)
     this.updateProgressState()
   }
 

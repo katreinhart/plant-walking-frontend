@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 // import './App.css';
 import Navigation from '../shared/Navigation'
@@ -6,8 +6,6 @@ import PlantContainer from './PlantContainer'
 import ProgressBar from './ProgressBar'
 import AddStepsContainer from './AddStepsContainer'
 import ViewGarden from '../garden/ViewGarden'
-
-import axios from 'axios'
 
 const HomePlant = ({ plant_id, plant_name, steps_required, steps_recorded, addSteps }) => {
   return (

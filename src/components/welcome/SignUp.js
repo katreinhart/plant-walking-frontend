@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import { Link, Redirect } from 'react-router-dom'
-import Navigation from '../shared/Navigation'
+import { Link } from 'react-router-dom'
 import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
@@ -26,7 +25,7 @@ class SignUp extends Component {
     e.preventDefault()
     const { email, password } = this.state
     try {
-      const response = await axios.post(`${localhostUrl}/register`, { email, password })
+      await axios.post(`${localhostUrl}/register`, { email, password })
       window.localStorage.setItem('signupsuccess', true)
       window.location.href = '/login'
     } catch(error) {

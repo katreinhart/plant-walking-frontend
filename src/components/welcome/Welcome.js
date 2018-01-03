@@ -11,7 +11,7 @@ class Welcome extends Component {
     return (
       <div className="splash-container">
 
-        <img className="splash-image" src="./images/grown_plant.png" />
+        <img className="splash-image" src="./images/grown_plant.png" alt="A plant"/>
 
         <div className="buttons-container">
           <Link to='/signup'>

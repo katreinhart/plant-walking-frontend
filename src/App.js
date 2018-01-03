@@ -201,12 +201,19 @@ class App extends Component {
   async getUserInformation() {
     // use to retrieve current user info (email, id, current plant id)
     const userId = localStorage.getItem('user_id')
-    
-    const {data: { response: [user] }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
-    
+    const { data: { response }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
+    console.log(response)
+    const { id, plant_instances_id } = response[0]
+    console.log(id, plant_instances_id)
+    const prevState = Object.assign({}, this.state)
+
     this.setState({
+      ...prevState,
       currentUser: {
-        user_id: user.id
+        user_id: id
+      },
+      currentPlant: {
+        plant_instances_id: plant_instances_id
       }
     })
   }
@@ -222,7 +229,7 @@ class App extends Component {
           <PrivateRoute path='/' exact
             component={ HomePlant }
             addSteps={this.handleAddSteps}
-            plant_id={this.state.currentPlant.plantInstanceId}
+            plant_id={this.state.currentPlant.plant_instances_id}
             steps_recorded={this.state.currentPlant.progress}
             steps_required={this.state.currentPlant.steps_required}
           />
@@ -243,7 +250,7 @@ class App extends Component {
           <PrivateRoute path='/pickseed'
             component={ PickSeed }
             handleSelect={ this.handleSelectSeed }
-            currentPlantID={ this.state.currentPlant.plantInstanceId }
+            currentPlantID={ this.state.currentPlant.plant_instances_id }
           />
           <PrivateRoute path='/profile' component={ Profile } />
           <PrivateRoute path='/logout' component={ LogOut } />

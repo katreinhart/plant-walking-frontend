@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+
 const PlantContainer = ({ handleNext, handlePrev, plantId, stepsRecorded }) => {
   const leftArrow = <div className ="carousel-arrow left" onClick={handlePrev}>
     <i className ="material-icons">keyboard_arrow_left</i>
@@ -8,8 +10,10 @@ const PlantContainer = ({ handleNext, handlePrev, plantId, stepsRecorded }) => {
   const rightArrow = <div className ="carousel-arrow right" onClick={handleNext}>
     <i className ="material-icons">keyboard_arrow_right</i>
   </div>
-  console.log(plantId, "plantId");
-  console.log(stepsRecorded, "stepsRec");
+  //need plant type id, and not plant instance
+  // console.log(plantId, "plantId");
+  //steps are not being passed down
+  // console.log(stepsRecorded, "stepsRec");
 
   // stepsRecorded -> 50
   // endSteps -> 100

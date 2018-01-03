@@ -46,9 +46,9 @@ class App extends Component {
     this.handleSelectSeed = this.handleSelectSeed.bind(this)
   }
 
-  componentDidMount() {
-    this.getUserInformation()
-    this.updateProgressState()
+  async componentDidMount() {
+    await this.getUserInformation()
+    await this.updateProgressState()
   }
 
   async handleAddSteps(e) {
@@ -72,13 +72,13 @@ class App extends Component {
     console.log('sign in')
     const email = e.target.querySelectorAll('input')[0].value
     const password = e.target.querySelectorAll('input')[1].value
-    
+
     const body = { email, password }
-    
+
     try {
       const response = await axios.post(`${localhostURL}/users/login`, body)
       console.log(response.data)
-      let { 
+      let {
         token,
         email,
         userId: user_id,
@@ -93,7 +93,7 @@ class App extends Component {
       }
 
       localStorage.setItem('token', token)
-      window.isAuthenticated = true 
+      window.isAuthenticated = true
       localStorage.setItem('user_id', user_id)
 
       const prevState = Object.assign({}, this.state)
@@ -127,7 +127,8 @@ class App extends Component {
 
 
   async updateProgressState() {
-    const plantInstanceId = this.state.currentPlant.plant_instance_id
+    console.log('updateProgressState', this.state.currentPlant)
+    const plantInstanceId = this.state.currentPlant.plant_instances_id
 
     const {
       data: {
@@ -202,9 +203,9 @@ class App extends Component {
     // use to retrieve current user info (email, id, current plant id)
     const userId = localStorage.getItem('user_id')
     const { data: { response }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
-    console.log(response)
+    console.log(response, "response")
     const { id, plant_instances_id } = response[0]
-    console.log(id, plant_instances_id)
+    console.log(id, "id", plant_instances_id, "plant_instances_id")
     const prevState = Object.assign({}, this.state)
 
     this.setState({
@@ -216,6 +217,7 @@ class App extends Component {
         plant_instances_id: plant_instances_id
       }
     })
+    console.log('getUserInformation', this.state.currentPlant)
   }
 
   sayHi(){
@@ -223,13 +225,15 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <Router>
         <div className="outermost-container">
           <PrivateRoute path='/' exact
             component={ HomePlant }
+            currentPlant={ this.state.currentPlant }
             addSteps={this.handleAddSteps}
-            plant_id={this.state.currentPlant.plant_instances_id}
+            plant_id={this.state.currentPlant.plant_instance_id}
             steps_recorded={this.state.currentPlant.progress}
             steps_required={this.state.currentPlant.steps_required}
           />

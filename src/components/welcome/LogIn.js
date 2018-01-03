@@ -16,6 +16,7 @@ const LogIn = (({ onSignIn, loginError }) => {
     return (
       <div className="outermost-container">
         <CloseForm title="Log In"/>
+
         <form onSubmit={ onSignIn }>
           <TextInputLabeled role="text" label="email"/>
           <TextInputLabeled role="password" label="password" />

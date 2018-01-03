@@ -89,6 +89,7 @@ class App extends Component {
       window.isAuthenticated = true 
       localStorage.setItem('user_id', user_id)
 
+
       const prevState = Object.assign({}, this.state)
 
       this.setState({
@@ -120,21 +121,21 @@ class App extends Component {
 
 
   async updateProgressState() {
-    const { 
-      data: { 
+    const {
+      data: {
         plant_instance: {
-          user_id, 
-          plant_types_id, 
-          progress, 
-          id: plant_instance_id  
+          user_id,
+          plant_types_id,
+          progress,
+          id: plant_instance_id
         }
       }
     } = await axios.get(`${localhostURL}/plant-instances/2`)
 
-    const { 
-      data: { 
-        plant: { 
-          steps_required 
+    const {
+      data: {
+        plant: {
+          steps_required
         }
       }
     } = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
@@ -180,9 +181,9 @@ class App extends Component {
     return (
       <Router>
         <div className="outermost-container">
-          <PrivateRoute path='/' exact 
-            component={ HomePlant } 
-            addSteps={this.handleAddSteps} 
+          <PrivateRoute path='/' exact
+            component={ HomePlant }
+            addSteps={this.handleAddSteps}
             plant_id={this.state.plant_instance_id}
             steps_recorded={this.state.currentPlant.progress}
             steps_required={this.state.currentPlant.steps_required}
@@ -201,7 +202,7 @@ class App extends Component {
           <PrivateRoute path='/history' component={ History } />
           <PrivateRoute path='/editsteps' component={ EditSteps } />
           <PrivateRoute path='/deletesteps' component={ DeleteSteps } />
-          <PrivateRoute path='/pickseed' 
+          <PrivateRoute path='/pickseed'
             component={ PickSeed }
             handleSelect={ this.handleSelectSeed }
           />

@@ -14,18 +14,20 @@ class SignUp extends Component {
     this.state = {
       email: '',
       password: '',
+      username:'',
       isError: false
     }
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.handleSignUp = this.handleSignUp.bind(this)
+    this.handleUsernameChange = this.handleUsernameChange.bind(this)
   }
 
   async handleSignUp (e) {
     e.preventDefault()
-    const { email, password } = this.state
+    const { username, email, password } = this.state
     try {
-      await axios.post(`${localhostUrl}/register`, { email, password })
+      await axios.post(`${localhostUrl}/register`, { username, email, password })
       window.localStorage.setItem('signupsuccess', true)
       window.location.href='/login'
     } catch(error) {
@@ -40,12 +42,16 @@ class SignUp extends Component {
   handlePasswordChange(e) {
     this.setState({ password: e.target.value })
   }
+  handleUsernameChange(e) {
+    this.setState({ username: e.target.value })
+  }
 
   render() {
     return (
       <div className="outermost-container">
         <CloseForm title="Sign Up"/>
         <form onSubmit={ this.handleSignUp }>
+          <TextInputLabeled  label="username" onChange={ this.handleUsernameChange }/>
           <TextInputLabeled label="e-mail" onChange={ this.handleEmailChange }/>
           <TextInputLabeled role="password" label="password" onChange={ this.handlePasswordChange }/>
           <div className="buttons-container">

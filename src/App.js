@@ -70,13 +70,23 @@ class App extends Component {
     e.preventDefault()
     const email = e.target.querySelectorAll('input')[0].value
     const password = e.target.querySelectorAll('input')[1].value
-
+    
+    const body = { email, password }
+    
     try {
-      const response = await axios.post(`${localhostURL}/users/login`, {email, password})
-      console.log(response.data)
-      let { token } = response.data
+      const response = await axios.post(`${localhostURL}/users/login`, body)
+      
+      let { 
+        token,
+        email,
+        userId: user_id,
+        plantInstanceId,
+        plantTypeId: plant_types_id,
+        progress
+      } = response.data
+
       localStorage.setItem('token', token)
-      window.isAuthenticated = true 
+      window.isAuthenticated = true
 
       const prevState = Object.assign({}, this.state)
 
@@ -86,13 +96,13 @@ class App extends Component {
         loginError: false,
         token: token,
         currentUser: {
-          email: response.data.email,
-          user_id: response.data.userId
+          email,
+          user_id,
         },
         currentPlant: {
-          plantInstanceId: response.data.plantInstanceId,
-          plant_types_id: response.data.plant_types_id,
-          progress: response.data.progress,
+          plantInstanceId,
+          plant_types_id,
+          progress,
         },
       })
     }
@@ -109,21 +119,21 @@ class App extends Component {
 
 
   async updateProgressState() {
-    const { 
-      data: { 
+    const {
+      data: {
         plant_instance: {
-          user_id, 
-          plant_types_id, 
-          progress, 
-          id: plant_instance_id  
+          user_id,
+          plant_types_id,
+          progress,
+          id: plant_instance_id
         }
       }
     } = await axios.get(`${localhostURL}/plant-instances/2`)
 
-    const { 
-      data: { 
-        plant: { 
-          steps_required 
+    const {
+      data: {
+        plant: {
+          steps_required
         }
       }
     } = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
@@ -168,9 +178,9 @@ class App extends Component {
     return (
       <Router>
         <div className="outermost-container">
-          <PrivateRoute path='/' exact 
-            component={ HomePlant } 
-            addSteps={this.handleAddSteps} 
+          <PrivateRoute path='/' exact
+            component={ HomePlant }
+            addSteps={this.handleAddSteps}
             plant_id={this.state.plant_instance_id}
             steps_recorded={this.state.currentPlant.progress}
             steps_required={this.state.currentPlant.steps_required}
@@ -189,7 +199,7 @@ class App extends Component {
           <PrivateRoute path='/history' component={ History } />
           <PrivateRoute path='/editsteps' component={ EditSteps } />
           <PrivateRoute path='/deletesteps' component={ DeleteSteps } />
-          <PrivateRoute path='/pickseed' 
+          <PrivateRoute path='/pickseed'
             component={ PickSeed }
             handleSelect={ this.handleSelectSeed }
           />
@@ -203,6 +213,9 @@ class App extends Component {
 
 const LogOut = () => {
   window.isAuthenticated = false
+  localStorage.removeItem('token')
+  localStorage.removeItem('logged_in')
+
 
   return (
     <Redirect to={{

@@ -1,7 +1,9 @@
+import axios from 'axios'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Navigation from '../shared/Navigation'
 import BackToPlant from './BackToPlant'
+const localhostURL = 'http://localhost:2999/api'
 
 class Garden extends Component {
   constructor(props){
@@ -11,8 +13,11 @@ class Garden extends Component {
 
 
 
-  componentDidMount(){
-    console.log(this.props.user_id);
+  async componentDidMount(){
+    console.log('user id', this.props.user_id);
+    let garden = await axios.get(`${localhostURL}/plant-instances/garden/${this.props.user_id}`)
+    console.log(garden);
+    this.setState({completedPlants:garden})
   }
   render() {
 

@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-// import Navigation from '../shared/Navigation'
-// import CloseForm from '../shared/CloseForm'
-// import TextInputLabeled from '../shared/TextInputLabeled'
+import { Link, Redirect } from 'react-router-dom'
 import GreenButton from '../shared/GreenButton'
 
-class Welcome extends Component {
-  state = {}
-  render() {
+const Welcome = () => {
+  if(window.isAuthenticated) {
+    return (
+      <Redirect to='/' />
+    )
+  } else {
     return (
       <div className="splash-container">
         <img className="splash-image" src="./images/grown_plant.png" alt="A plant"/>
-
+  
         <div className="buttons-container">
           <Link to='/signup' style={{width: '95%'}}>
             <GreenButton text="sign up" />

@@ -47,8 +47,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.updateProgressState()
     this.getUserInformation()
+    this.updateProgressState()
   }
 
   async handleAddSteps(e) {
@@ -68,6 +68,7 @@ class App extends Component {
 
   async handleSignInClick(e) {
     e.preventDefault()
+    console.log('sign in')
     const email = e.target.querySelectorAll('input')[0].value
     const password = e.target.querySelectorAll('input')[1].value
     
@@ -85,10 +86,14 @@ class App extends Component {
         progress
       } = response.data
 
+      if(!plantInstanceId) {
+        console.log('We need to pick a plant!')
+        // render pick plant display
+      }
+
       localStorage.setItem('token', token)
       window.isAuthenticated = true 
       localStorage.setItem('user_id', user_id)
-
 
       const prevState = Object.assign({}, this.state)
 
@@ -121,6 +126,8 @@ class App extends Component {
 
 
   async updateProgressState() {
+    const plantInstanceId = this.state.currentPlant.plant_instance_id
+
     const {
       data: {
         plant_instance: {
@@ -130,7 +137,7 @@ class App extends Component {
           id: plant_instance_id
         }
       }
-    } = await axios.get(`${localhostURL}/plant-instances/2`)
+    } = await axios.get(`${localhostURL}/plant-instances/${plantInstanceId}`)
 
     const {
       data: {
@@ -143,6 +150,7 @@ class App extends Component {
     const prevState = Object.assign({}, this.state)
 
     this.setState({
+      ...prevState,
       currentPlant: {
         plant_instance_id,
         plant_types_id,
@@ -158,23 +166,48 @@ class App extends Component {
     const selectedPlantId = parseInt(e.target.id, 10)
     const userId = this.state.currentUser.userId
 
-    this.updateSelectedPlantInfo({ userId, selectedPlantId })
+    this.updateSelectedPlantInfo({ selectedPlantId })
   }
 
   async updateUserInfo({ email, displayName, password }) {
     // change a user's display name or password (STRETCH)
   }
 
-  async updateSelectedPlantInfo({ userId, plantyTypeId }) {
+  async updateSelectedPlantInfo({ selectedPlantId }) {
     // make db call to update user's current plant to the new plant type specified
+    console.log(selectedPlantId)
+    const userId = localStorage.getItem('user_id')
+    const body = { user_id: userId, plant_types_id: selectedPlantId }
+    console.log(body)
+    const response = await axios.patch(`${localhostURL}/user-profiles/${userId}`, body)
+    console.log(response)
+    const {
+      plant_types_id,
+      id: plant_instance_id
+    } = response.data.result[0]
 
+    console.log(plant_types_id, plant_instance_id)
+    const prevState = Object.assign({}, this.state)
+    this.setState({
+      ...prevState,
+      currentPlant: {
+        plant_types_id,
+        plantInstanceId: plant_instance_id
+      }
+    })
   }
 
   async getUserInformation() {
     // use to retrieve current user info (email, id, current plant id)
     const userId = localStorage.getItem('user_id')
-    const response = await axios.get(`${localhostURL}/user-profiles/${userId}`)
-    console.log(response)
+    
+    const {data: { response: [user] }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
+    
+    this.setState({
+      currentUser: {
+        user_id: user.id
+      }
+    })
   }
 
   render() {
@@ -184,7 +217,7 @@ class App extends Component {
           <PrivateRoute path='/' exact
             component={ HomePlant }
             addSteps={this.handleAddSteps}
-            plant_id={this.state.plant_instance_id}
+            plant_id={this.state.currentPlant.plantInstanceId}
             steps_recorded={this.state.currentPlant.progress}
             steps_required={this.state.currentPlant.steps_required}
           />
@@ -205,6 +238,7 @@ class App extends Component {
           <PrivateRoute path='/pickseed'
             component={ PickSeed }
             handleSelect={ this.handleSelectSeed }
+            currentPlantID={ this.state.currentPlant.plantInstanceId }
           />
           <PrivateRoute path='/profile' component={ Profile } />
           <PrivateRoute path='/logout' component={ LogOut } />

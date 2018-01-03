@@ -3,6 +3,7 @@ import CloseForm from '../shared/CloseForm'
 import PlantContainer from '../home/PlantContainer'
 import GreenButton from '../shared/GreenButton'
 import Carousel, { CarouselDecorator } from 'nuka-carousel'
+import { Redirect } from 'react-router-dom'
 
 import '../../css/pickseed.css'
 
@@ -22,6 +23,7 @@ class PickSeed extends Component {
 
   componentDidMount() {
     this.retrievePlantTypes() 
+    console.log(this.state.plants)
   }
 
   async retrievePlantTypes() {
@@ -42,6 +44,10 @@ class PickSeed extends Component {
   }
 
   render() {
+    if(this.props.currentPlantID) {
+      // don't display pick seed if user has a plant
+      return (<Redirect to='/' />) 
+    } else 
     return (
       <div className="outermost-container">
         <CloseForm title="Pick New Seed"/>

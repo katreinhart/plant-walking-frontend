@@ -18,7 +18,6 @@ class PickSeed extends Component {
     }
     this.handleNext   = this.handleNext.bind(this)
     this.handlePrev   = this.handlePrev.bind(this)
-    this.handleSelect = this.handleSelect.bind(this)
   }
 
   componentDidMount() {
@@ -42,11 +41,6 @@ class PickSeed extends Component {
     this.refs.carousel.previousSlide()
   }
 
-  handleSelect (e) {
-    e.preventDefault()
-    console.log('You have chosen plant number', e.target.id)
-  }
-
   render() {
     return (
       <div className="outermost-container">
@@ -67,7 +61,7 @@ class PickSeed extends Component {
                 steps_required={ plant.steps_required }
                 handleNext={ this.handleNext }
                 handlePrev={ this.handlePrev }
-                handleSelect={ this.handleSelect }
+                handleSelect={ this.props.handleSelect }
               />
             ))
           }

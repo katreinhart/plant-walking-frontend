@@ -10,15 +10,14 @@ class Welcome extends Component {
   render() {
     return (
       <div className="splash-container">
-
-        <img className="splash-image" src="./images/grown_plant.png" />
+        <img className="splash-image" src="./images/grown_plant.png" alt="A plant"/>
 
         <div className="buttons-container">
-          <Link to='/signup'>
-            <GreenButton text="sign up"/>
+          <Link to='/signup' style={{width: '95%'}}>
+            <GreenButton text="sign up" />
           </Link>
-          <Link to='/login'>
-            <GreenButton text="log in"/>
+          <Link to='/login' style={{width: '95%'}}>
+            <GreenButton text="log in" />
           </Link>
         </div>
       </div>

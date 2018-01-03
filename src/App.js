@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import axios from 'axios'
+
 import Garden from './components/garden/Garden'
 import HomePlant from './components/home/HomePlant'
 import Menu from './components/menu/Menu'
@@ -12,6 +13,8 @@ import LogIn from './components/welcome/LogIn'
 import Welcome from './components/welcome/Welcome'
 import PickSeed from './components/forms/PickSeed'
 import Profile from './components/profile/Profile'
+
+const localhostURL = 'http://localhost:2999/api'
 
 class App extends Component {
   constructor() {
@@ -28,18 +31,67 @@ class App extends Component {
 
     this.state = {
       authenticated: !!token,
-      token: token
+      token: token,
+      currentUser: {},
+      currentPlant: {}
     }
+
+    this.updateProgressState = this.updateProgressState.bind(this)
+    this.handleAddSteps = this.handleAddSteps.bind(this)
+  }
+
+  componentDidMount() {
+    this.updateProgressState()
+  }
+
+  async handleAddSteps(e) {
+    e.preventDefault()
+
+    const input = e.target.querySelector('.input-field')
+    const stepsAdded = parseInt(input.value, 10)
+    input.value = ''
+
+    const body = {
+      user_id: 2,
+      number_of_steps: stepsAdded
+    }
+    const response = await axios.post(`${localhostURL}/steps`, body)
+    this.updateProgressState()
+  }
+
+  async updateProgressState() {
+    const response = await axios.get(`${localhostURL}/plant-instances/2`)
+    const { user_id, plant_types_id, progress, id: plant_instance_id } = response.data.plant_instance
+    const { data: { plant: { steps_required } }} = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
+
+    this.setState({
+      currentUser: {
+        user_id,
+      },
+      currentPlant: {
+        plant_instance_id,
+        plant_types_id,
+        progress,
+        steps_required,
+      }
+    })
   }
 
   render() {
     return (
       <Router>
         <div className="outermost-container">
-          <PrivateRoute path='/' exact={true} component={ HomePlant } />
-          <Route path='/signup' component={ SignUp } />
+          <PrivateRoute path='/' exact 
+            component={ HomePlant } 
+            addSteps={this.handleAddSteps} 
+            plant_id={this.state.plant_instance_id}
+            steps_recorded={this.state.currentPlant.progress}
+            steps_required={this.state.currentPlant.steps_required}
+          />
+          <Route path='/signup' render={() => <SignUp />} />
           <Route path='/login' component={ LogIn } />
           <Route path='/welcome' component={ Welcome } />
+
           <PrivateRoute path='/garden' component={ Garden } />
           <PrivateRoute path='/menu' component={ Menu } />
           <PrivateRoute path='/history' component={ History } />
@@ -50,7 +102,7 @@ class App extends Component {
           <PrivateRoute path='/logout' component={ LogOut } />
         </div>
       </Router>
-    );
+    )
   }
 }
 
@@ -62,19 +114,20 @@ const LogOut = () => {
     <Redirect to={{
       pathname: '/login'
     }} />
-)}
+  )
+}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     window.logged_in ? (
-      <Component {...props}/>
+      <Component {...props}{...rest} />
     ) : (
       <Redirect to={{
-        pathname: '/login',
+        pathname: '/welcome',
         state: { from: props.location }
       }}/>
     )
   )}/>
 )
 
-export default App;
+export default App

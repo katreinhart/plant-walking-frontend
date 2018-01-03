@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import { Link, Redirect } from 'react-router-dom'
-import Navigation from '../shared/Navigation'
+import { Link, Redirect} from 'react-router-dom'
 import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
@@ -26,13 +25,11 @@ class SignUp extends Component {
     e.preventDefault()
     const { email, password } = this.state
     try {
-      const response = await axios.post(`${localhostUrl}/register`, { email, password })
+      await axios.post(`${localhostUrl}/register`, { email, password })
       window.localStorage.setItem('signupsuccess', true)
-      window.location.href = '/login'
+      window.location.href='/login'
     } catch(error) {
-      console.log('There was an error creating the user')
       this.setState({isError: true})
-      // update DOM to reflect error status
     }
   }
 
@@ -49,10 +46,10 @@ class SignUp extends Component {
       <div className="outermost-container">
         <CloseForm title="Sign Up"/>
         <form onSubmit={ this.handleSignUp }>
-        <TextInputLabeled label="e-mail" onChange={ this.handleEmailChange }/>
-        <TextInputLabeled role="password" label="password" onChange={ this.handlePasswordChange }/>
-        <div className="buttons-container">
-        { this.state.isError ? <div className="error">Please check your input and try again</div> : '' }
+          <TextInputLabeled label="e-mail" onChange={ this.handleEmailChange }/>
+          <TextInputLabeled role="password" label="password" onChange={ this.handlePasswordChange }/>
+          <div className="buttons-container">
+            { this.state.isError ? <div className="error">Please check your input and try again</div> : '' }
             <GreenButton text="sign up" htmlFor='submit'/>
           </div>
         </form>

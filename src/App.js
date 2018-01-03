@@ -81,6 +81,7 @@ class App extends Component {
       const prevState = Object.assign({}, this.state)
 
       this.setState({
+        ...prevState,
         authenticated: true,
         loginError: false,
         token: token,
@@ -93,17 +94,17 @@ class App extends Component {
           plant_types_id: response.data.plant_types_id,
           progress: response.data.progress,
         },
-        ...prevState
       })
     }
 
     catch(error){
       console.log( 'errors', error);
+      const prevState = Object.assign({}, this.state)
       this.setState({
-        loginError: true
+        ...prevState,
+        loginError: true,
       })
     }
-    
   }
 
 
@@ -130,12 +131,13 @@ class App extends Component {
     const prevState = Object.assign({}, this.state)
 
     this.setState({
+      ...prevState,
       currentPlant: {
         plant_instance_id,
         plant_types_id,
         progress,
         steps_required,
-      }, ...prevState
+      },
     })
   }
 
@@ -159,6 +161,7 @@ class App extends Component {
 
   async getUserInformation() {
     // use to retrieve current user info (email, id, current plant id)
+
   }
 
   render() {

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+
 import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
-import axios from 'axios'
 
 const localhostUrl = 'http://localhost:2999/api/users'
+
 class Login extends Component {
   constructor (){
     super()
@@ -17,11 +19,11 @@ class Login extends Component {
   }
 
   handleEmail = (e) => {
-    this.setState({email:e.target.value})
+    this.setState({email: e.target.value})
   }
 
   handlePassword = (e) => {
-    this.setState({password:e.target.value})
+    this.setState({password: e.target.value})
   }
 
   async handleSignin(e) {
@@ -42,6 +44,7 @@ class Login extends Component {
 
   render() {
     const successFlag = window.localStorage.getItem('signupsuccess')
+
     window.localStorage.removeItem('signupsuccess')
 
     return (

@@ -5,7 +5,7 @@ const MenuItem = ({ name, link }) => {
   return (
     <div>
       <Link className="history-item" to={ link }>
-        <p className="history-column">{ name }</p>
+        <p className="history-column text-ctr">{ name }</p>
       </Link>
       <hr></hr>
     </div>

@@ -47,7 +47,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.getUserInformation()
+    this.getUserInformation()
     this.updateProgressState()
   }
 
@@ -68,15 +68,32 @@ class App extends Component {
 
   async handleSignInClick(e) {
     e.preventDefault()
+    console.log('sign in')
     const email = e.target.querySelectorAll('input')[0].value
     const password = e.target.querySelectorAll('input')[1].value
-
+    
+    const body = { email, password }
+    
     try {
-      const response = await axios.post(`${localhostURL}/users/login`, {email, password})
+      const response = await axios.post(`${localhostURL}/users/login`, body)
       console.log(response.data)
-      let { token } = response.data
+      let { 
+        token,
+        email,
+        userId: user_id,
+        plantInstanceId,
+        plantTypeId: plant_types_id,
+        progress
+      } = response.data
+
+      if(!plantInstanceId) {
+        console.log('We need to pick a plant!')
+        // render pick plant display
+      }
+
       localStorage.setItem('token', token)
-      window.isAuthenticated = true
+      window.isAuthenticated = true 
+      localStorage.setItem('user_id', user_id)
 
       const prevState = Object.assign({}, this.state)
 
@@ -86,13 +103,13 @@ class App extends Component {
         loginError: false,
         token: token,
         currentUser: {
-          email: response.data.email,
-          user_id: response.data.userId
+          email,
+          user_id,
         },
         currentPlant: {
-          plantInstanceId: response.data.plantInstanceId,
-          plant_types_id: response.data.plant_types_id,
-          progress: response.data.progress,
+          plantInstanceId,
+          plant_types_id,
+          progress,
         },
       })
     }
@@ -101,14 +118,16 @@ class App extends Component {
       console.log( 'errors', error);
       const prevState = Object.assign({}, this.state)
       this.setState({
-        ...prevState,
         loginError: true,
+        authenticated: false,
       })
     }
   }
 
 
   async updateProgressState() {
+    const plantInstanceId = this.state.currentPlant.plant_instance_id
+
     const {
       data: {
         plant_instance: {
@@ -118,7 +137,7 @@ class App extends Component {
           id: plant_instance_id
         }
       }
-    } = await axios.get(`${localhostURL}/plant-instances/2`)
+    } = await axios.get(`${localhostURL}/plant-instances/${plantInstanceId}`)
 
     const {
       data: {
@@ -147,21 +166,48 @@ class App extends Component {
     const selectedPlantId = parseInt(e.target.id, 10)
     const userId = this.state.currentUser.userId
 
-    this.updateSelectedPlantInfo({ userId, selectedPlantId })
+    this.updateSelectedPlantInfo({ selectedPlantId })
   }
 
   async updateUserInfo({ email, displayName, password }) {
     // change a user's display name or password (STRETCH)
   }
 
-  async updateSelectedPlantInfo({ userId, plantyTypeId }) {
+  async updateSelectedPlantInfo({ selectedPlantId }) {
     // make db call to update user's current plant to the new plant type specified
+    console.log(selectedPlantId)
+    const userId = localStorage.getItem('user_id')
+    const body = { user_id: userId, plant_types_id: selectedPlantId }
+    console.log(body)
+    const response = await axios.patch(`${localhostURL}/user-profiles/${userId}`, body)
+    console.log(response)
+    const {
+      plant_types_id,
+      id: plant_instance_id
+    } = response.data.result[0]
 
+    console.log(plant_types_id, plant_instance_id)
+    const prevState = Object.assign({}, this.state)
+    this.setState({
+      ...prevState,
+      currentPlant: {
+        plant_types_id,
+        plantInstanceId: plant_instance_id
+      }
+    })
   }
 
   async getUserInformation() {
     // use to retrieve current user info (email, id, current plant id)
-
+    const userId = localStorage.getItem('user_id')
+    
+    const {data: { response: [user] }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
+    
+    this.setState({
+      currentUser: {
+        user_id: user.id
+      }
+    })
   }
 
   sayHi(){
@@ -175,7 +221,7 @@ class App extends Component {
           <PrivateRoute path='/' exact
             component={ HomePlant }
             addSteps={this.handleAddSteps}
-            plant_id={this.state.plant_instance_id}
+            plant_id={this.state.currentPlant.plantInstanceId}
             steps_recorded={this.state.currentPlant.progress}
             steps_required={this.state.currentPlant.steps_required}
           />
@@ -196,6 +242,7 @@ class App extends Component {
           <PrivateRoute path='/pickseed'
             component={ PickSeed }
             handleSelect={ this.handleSelectSeed }
+            currentPlantID={ this.state.currentPlant.plantInstanceId }
           />
           <PrivateRoute path='/profile' component={ Profile } />
           <PrivateRoute path='/logout' component={ LogOut } />
@@ -207,6 +254,9 @@ class App extends Component {
 
 const LogOut = () => {
   window.isAuthenticated = false
+  localStorage.removeItem('user_id')
+  localStorage.removeItem('token')
+  localStorage.removeItem('logged_in')
 
   return (
     <Redirect to={{

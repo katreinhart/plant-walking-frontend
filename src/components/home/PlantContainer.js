@@ -1,13 +1,13 @@
 import React from 'react'
 
-const PlantContainer = ({ plant_name, steps_required }) => {
+const PlantContainer = ({ handleNext, handlePrev }) => {
   return (
     <div className ="plant-container">
-      <div className ="carousel-arrow left">
+      <div className ="carousel-arrow left" onClick={handlePrev}>
         <i className ="material-icons">keyboard_arrow_left</i>
       </div>
         <img className ="plant-image" alt="seedling" src="./images/seedling_plant.png" />
-      <div className ="carousel-arrow right">
+      <div className ="carousel-arrow right" onClick={handleNext}>
         <i className ="material-icons">keyboard_arrow_right</i>
       </div>
     </div>

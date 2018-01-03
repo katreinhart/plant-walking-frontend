@@ -37,7 +37,7 @@ class App extends Component {
       currentUserEmail: '',
       currentUserDisplay: '',
       currentPlantTypeId: null,
-      currentPlantInstanceId: null, 
+      currentPlantInstanceId: null,
       currentPlantStepsRequired: null,
       currentPlantStepsProgress: null
     }
@@ -235,7 +235,7 @@ class App extends Component {
 
           <PrivateRoute path='/garden' component={ Garden } user_id={this.state.currentUserId}/>
           <PrivateRoute path='/menu' component={ Menu } />
-          <PrivateRoute path='/history' component={ History } user_id={this.state.currentUser.user_id}/>
+          <PrivateRoute path='/history' component={ History } user_id={this.state.currentUserId}/>
           <PrivateRoute path='/editsteps' component={ EditSteps } />
           <PrivateRoute path='/deletesteps' component={ DeleteSteps } />
           <PrivateRoute path='/pickseed'

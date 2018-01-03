@@ -30,6 +30,7 @@ class App extends Component {
     }
 
     this.state = {
+      loginError: false,
       authenticated: !!token,
       token: token,
       currentUser: {
@@ -77,8 +78,12 @@ class App extends Component {
       localStorage.setItem('token', token)
       window.isAuthenticated = true
 
+      const prevState = Object.assign({}, this.state)
+
       this.setState({
+        ...prevState,
         authenticated: true,
+        loginError: false,
         token: token,
         currentUser: {
           email: response.data.email,
@@ -88,17 +93,18 @@ class App extends Component {
           plantInstanceId: response.data.plantInstanceId,
           plant_types_id: response.data.plant_types_id,
           progress: response.data.progress,
-        }
+        },
       })
-
     }
+
     catch(error){
       console.log( 'errors', error);
-      return ({
-        isError: true
+      const prevState = Object.assign({}, this.state)
+      this.setState({
+        ...prevState,
+        loginError: true,
       })
     }
-
   }
 
 
@@ -125,12 +131,13 @@ class App extends Component {
     const prevState = Object.assign({}, this.state)
 
     this.setState({
+      ...prevState,
       currentPlant: {
         plant_instance_id,
         plant_types_id,
         progress,
         steps_required,
-      }, ...prevState
+      },
     })
   }
 
@@ -154,6 +161,7 @@ class App extends Component {
 
   async getUserInformation() {
     // use to retrieve current user info (email, id, current plant id)
+
   }
 
   render() {
@@ -171,6 +179,7 @@ class App extends Component {
           <Route path='/login'
             render={(routeProps) => (<LogIn {...routeProps}
               onSignIn={ this.handleSignInClick }
+              loginError={ this.state.loginError }
             />)}
           />
           <Route path='/welcome' component={ Welcome } />
@@ -194,7 +203,6 @@ class App extends Component {
 
 const LogOut = () => {
   window.isAuthenticated = false
-  localStorage.removeItem('token')
 
   return (
     <Redirect to={{

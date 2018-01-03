@@ -61,6 +61,7 @@ class App extends Component {
 
   async updateProgressState() {
     const response = await axios.get(`${localhostURL}/plant-instances/2`)
+    console.log(response);
     const { user_id, plant_types_id, progress, id: plant_instance_id } = response.data.plant_instance
     const { data: { plant: { steps_required } }} = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
 
@@ -81,9 +82,9 @@ class App extends Component {
     return (
       <Router>
         <div className="outermost-container">
-          <PrivateRoute path='/' exact 
-            component={ HomePlant } 
-            addSteps={this.handleAddSteps} 
+          <PrivateRoute path='/' exact
+            component={ HomePlant }
+            addSteps={this.handleAddSteps}
             plant_id={this.state.plant_instance_id}
             steps_recorded={this.state.currentPlant.progress}
             steps_required={this.state.currentPlant.steps_required}

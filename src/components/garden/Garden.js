@@ -1,11 +1,27 @@
+import axios from 'axios'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Navigation from '../shared/Navigation'
 import BackToPlant from './BackToPlant'
 
+const localhostURL = 'http://localhost:2999/api'
+
 class Garden extends Component {
-  state = {}
+  constructor(props){
+      super(props)
+      this.state =  { completedPlants:[] }
+  }
+
+
+
+  async componentDidMount(){
+    console.log('user id', this.props.user_id);
+    let garden = await axios.get(`${localhostURL}/plant-instances/garden/${this.props.user_id}`)
+    console.log(garden);
+    this.setState({completedPlants:garden})
+  }
   render() {
+
     return (
       <div className="outermost-container">
         <Navigation />
@@ -18,7 +34,7 @@ class Garden extends Component {
           <div className="garden-container mt-5">
             <div className="garden-row">
               <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
+                <img src='./images/plant-1-completed.png' width='50%'/>
               </div>
               <div className="garden-plant-box odd-plant-row">
                 <i className=" plant material-icons">insert_emoticon</i>

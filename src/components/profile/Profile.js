@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Navigation from '../shared/Navigation'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'

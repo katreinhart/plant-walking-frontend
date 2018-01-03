@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import Navigation from '../shared/Navigation'
 import CloseForm from '../shared/CloseForm'
-import TextInput from '../shared/TextInput'
-import GreenButton from '../shared/GreenButton'
 
 class DeleteSteps extends Component {
   state = {}

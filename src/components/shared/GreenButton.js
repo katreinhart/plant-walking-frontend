@@ -1,4 +1,5 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 
 const GreenButton = ({ text }) => {
   return (
@@ -8,4 +9,4 @@ const GreenButton = ({ text }) => {
   )
 }
 
-export default GreenButton;
+export default GreenButton

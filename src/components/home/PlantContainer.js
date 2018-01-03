@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PlantContainer = () => {
+const PlantContainer = ({ plant_name, steps_required }) => {
   return (
     <div className ="plant-container">
       <div className ="carousel-arrow left">

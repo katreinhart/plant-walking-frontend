@@ -34,10 +34,9 @@ class Garden extends Component {
 
           <div className="garden-container mt-5">
             <div className="garden-row">
-              {/* <div className="garden-plant-box odd-plant-row">
+              <div className="garden-plant-box odd-plant-row">
                 <img src='./images/plant-1-completed.png' width='50%'/>
-              </div> */}
-              <GardenPlant/>
+              </div>
               <div className="garden-plant-box odd-plant-row">
                 <i className=" plant material-icons">insert_emoticon</i>
               </div>

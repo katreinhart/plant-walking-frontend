@@ -33,11 +33,13 @@ class App extends Component {
       loginError: false,
       authenticated: !!token,
       token: token,
-      currentUser: {
-        email: '',
-        user_id: ''
-      },
-      currentPlant: {}
+      currentUserId: null,
+      currentUserEmail: '',
+      currentUserDisplay: '',
+      currentPlantTypeId: null,
+      currentPlantInstanceId: null, 
+      currentPlantStepsRequired: null,
+      currentPlantStepsProgress: null
     }
 
     this.updateProgressState = this.updateProgressState.bind(this)
@@ -59,7 +61,7 @@ class App extends Component {
     input.value = ''
 
     const body = {
-      user_id: this.state.currentUser.user_id,
+      user_id: this.state.currentUserId,
       number_of_steps: stepsAdded
     }
     console.log(body)
@@ -103,15 +105,11 @@ class App extends Component {
         authenticated: true,
         loginError: false,
         token: token,
-        currentUser: {
-          email,
-          user_id,
-        },
-        currentPlant: {
-          plantInstanceId,
-          plant_types_id,
-          progress,
-        },
+        currentUserEmail: email,
+        currentUserId: user_id,
+        currentPlantInstanceId: plantInstanceId,
+        currentPlantTypeId: plant_types_id,
+        currentPlantStepsProgress: progress,
       })
     }
 
@@ -127,8 +125,8 @@ class App extends Component {
 
 
   async updateProgressState() {
-    console.log('updateProgressState', this.state.currentPlant)
-    const plantInstanceId = this.state.currentPlant.plant_instances_id
+    console.log('updateProgressState', this.state.currentPlantInstanceId)
+    const plantInstanceId = this.state.currentPlantInstanceId
 
     const {
       data: {
@@ -153,22 +151,20 @@ class App extends Component {
 
     this.setState({
       ...prevState,
-      currentPlant: {
-        plant_instance_id,
-        plant_types_id,
-        progress,
-        steps_required,
-      },
+      currentPlantInstanceId: plant_instance_id,
+      currentPlantTypeId: plant_types_id,
+      currentPlantStepsRequired: steps_required,
+      currentPlantStepsProgress: progress
     })
   }
 
-  handleSelectSeed (e) {
+  async handleSelectSeed (e) {
     e.preventDefault()
     console.log('You have chosen plant number', e.target.id)
     const selectedPlantId = parseInt(e.target.id, 10)
     const userId = this.state.currentUser.userId
 
-    this.updateSelectedPlantInfo({ selectedPlantId })
+    await this.updateSelectedPlantInfo({ selectedPlantId })
   }
 
   async updateUserInfo({ email, displayName, password }) {
@@ -192,10 +188,9 @@ class App extends Component {
     const prevState = Object.assign({}, this.state)
     this.setState({
       ...prevState,
-      currentPlant: {
-        plant_types_id,
-        plantInstanceId: plant_instance_id
-      }
+      currentPlantInstanceId: plant_instance_id,
+      currentPlantTypeId: plant_types_id,
+      currentPlantStepsProgress: 0
     })
   }
 
@@ -210,18 +205,10 @@ class App extends Component {
 
     this.setState({
       ...prevState,
-      currentUser: {
-        user_id: id
-      },
-      currentPlant: {
-        plant_instances_id: plant_instances_id
-      }
+      currentUserId: id,
+      currentPlantInstanceId: plant_instances_id
     })
-    console.log('getUserInformation', this.state.currentPlant)
-  }
 
-  sayHi(){
-    console.log('Hi');
   }
 
   render() {
@@ -231,11 +218,11 @@ class App extends Component {
         <div className="outermost-container">
           <PrivateRoute path='/' exact
             component={ HomePlant }
-            currentPlant={ this.state.currentPlant }
+            currentPlantInstanceId={ this.state.currentPlantInstanceId }
             addSteps={this.handleAddSteps}
-            plant_id={this.state.currentPlant.plant_instance_id}
-            steps_recorded={this.state.currentPlant.progress}
-            steps_required={this.state.currentPlant.steps_required}
+            plant_id={this.state.currentPlantInstanceId}
+            steps_recorded={this.state.currentPlantStepsProgress}
+            steps_required={this.state.currentPlantStepsRequired}
           />
           <Route path='/signup' render={() => <SignUp />} />
           <Route path='/login'
@@ -246,7 +233,7 @@ class App extends Component {
           />
           <Route path='/welcome' component={ Welcome } />
 
-          <PrivateRoute path='/garden' component={ Garden } user_id={this.state.currentUser.user_id}/>
+          <PrivateRoute path='/garden' component={ Garden } user_id={this.state.currentUserId}/>
           <PrivateRoute path='/menu' component={ Menu } />
           <PrivateRoute path='/history' component={ History } />
           <PrivateRoute path='/editsteps' component={ EditSteps } />
@@ -254,7 +241,7 @@ class App extends Component {
           <PrivateRoute path='/pickseed'
             component={ PickSeed }
             handleSelect={ this.handleSelectSeed }
-            currentPlantID={ this.state.currentPlant.plant_instances_id }
+            currentPlantID={ this.state.currentPlantInstanceId }
           />
           <PrivateRoute path='/profile' component={ Profile } />
           <PrivateRoute path='/logout' component={ LogOut } />

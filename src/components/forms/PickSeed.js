@@ -44,6 +44,7 @@ class PickSeed extends Component {
   }
 
   render() {
+    console.log(this.props.currentPlantID)
     if(this.props.currentPlantID) {
       // don't display pick seed if user has a plant
       return (<Redirect to='/' />) 

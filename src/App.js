@@ -162,7 +162,7 @@ class App extends Component {
     e.preventDefault()
     console.log('You have chosen plant number', e.target.id)
     const selectedPlantId = parseInt(e.target.id, 10)
-    const userId = this.state.currentUser.userId
+    const userId = this.state.currentUserId 
 
     await this.updateSelectedPlantInfo({ selectedPlantId })
   }

@@ -27,7 +27,9 @@ As a user, I can...
 -View my history of step inputs  
 -Update my profile  
 
-<img src="./readme-images/newplant.png" width="350px" alt="new plant">
+<kbd>
+  <img src="./readme-images/newplant.png" width="350px" alt="new plant">
+</kbd>
 
 <img src="./readme-images/growingplant1.png" width="350px" alt="small growing plant">
 

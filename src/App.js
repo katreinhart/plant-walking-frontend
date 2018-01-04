@@ -13,7 +13,7 @@ import LogIn from './components/welcome/LogIn'
 import Welcome from './components/welcome/Welcome'
 import PickSeed from './components/forms/PickSeed'
 import Profile from './components/profile/Profile'
-
+import AnimatePlant from './components/home/AnimatePlant'
 const localhostURL = 'http://localhost:2999/api'
 
 // Why isn't the same thing happening when the user logs in as when the component is loaded?
@@ -70,7 +70,7 @@ class App extends Component {
     }
     console.log(body)
     const response = await axios.post(`${localhostURL}/steps`, body)
-    this.updateProgressState()
+    await this.updateProgressState()
   }
 
   async handleSignInClick(e) {
@@ -210,7 +210,6 @@ class App extends Component {
   }
 
   async updateSelectedPlantInfo({ selectedPlantType }) {
-    // make db call to update user's current plant to the new plant type specified
     console.log('update selected plant type to', selectedPlantType)
     const userId = localStorage.getItem('user_id')
     const body = { user_id: userId, plant_types_id: selectedPlantType }
@@ -220,7 +219,6 @@ class App extends Component {
       id: plant_instance_id
     } = response.data.result[0]
 
-    // console.log('plant update function', 'type', selectedPlantType, 'instance', plant_instance_id)
     const prevState = Object.assign({}, this.state)
     await this.setState({
       ...prevState,

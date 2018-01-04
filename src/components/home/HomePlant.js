@@ -7,28 +7,42 @@ import ProgressBar from './ProgressBar'
 import AddStepsContainer from './AddStepsContainer'
 import ViewGarden from '../garden/ViewGarden'
 
-const HomePlant = ({ 
-  handleAddSteps,
-  currentPlantInstanceId,
-  currentPlantStepsProgress,
-  currentPlantStepsRequired,
-  currentPlantTypeId 
-}) => {
-  if(!currentPlantInstanceId) {
-    // turning this back on with caution ... 
-    return <Redirect to={'/pickseed'} />
+class HomePlant extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      stepsInput: 0
+    }
   }
-  else return (
-    <div className="outermost-container">
-      <Navigation />
-      <CurrentPlantContainer currentPlantTypeId={ currentPlantTypeId } steps_recorded={ currentPlantStepsProgress } steps_required={ currentPlantStepsRequired }/>
-      <ProgressBar percent={ (parseInt(currentPlantStepsProgress, 10) / parseInt(currentPlantStepsRequired, 10) * 100) } />
-      <AddStepsContainer addSteps={ handleAddSteps } />
-      <Link to='/garden'>
-        <ViewGarden />
-      </Link>
-    </div>
-  )
+
+  getStepsInput(e) {
+    e.preventDefault()
+    const stepsInput = parseInt(e.target.querySelector('.input-field').value)
+    this.setState({stepsInput})
+  }
+
+  render() {
+    if(!this.props.currentPlantInstanceId) {
+      // turning this back on with caution ...
+      return <Redirect to={'/pickseed'} />
+    }
+    else return (
+      <div className="outermost-container">
+        <Navigation />
+        <CurrentPlantContainer currentPlantTypeId={ this.props.currentPlantTypeId } steps_recorded={ this.props.currentPlantStepsProgress } steps_required={ this.props.currentPlantStepsRequired } newSteps={ this.state.stepsInput }/>
+        <ProgressBar percent={ (parseInt(this.props.currentPlantStepsProgress, 10) / parseInt(this.props.currentPlantStepsRequired, 10) * 100) } />
+        <AddStepsContainer addSteps={ (e)=>{
+          this.getStepsInput(e)
+          this.props.handleAddSteps(e)
+        } } />
+        <Link to='/garden'>
+          <ViewGarden />
+        </Link>
+      </div>
+    )
+  }
 }
+
 
 export default HomePlant

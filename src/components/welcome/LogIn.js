@@ -25,7 +25,9 @@ const LogIn = (({ onSignIn, loginError }) => {
             <GreenButton text="log in" />
           </div>
         </form>
-        <Link to='/signup'>Need to register? Click here!</Link>
+        <p className="text-ctr">
+          <Link to='/signup'>Need to register? Click here!</Link>
+        </p>
       </div>
     )
   }

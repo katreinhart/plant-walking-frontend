@@ -261,7 +261,8 @@ class App extends Component {
     const plantInstanceId = this.state.currentPlantInstanceId
     console.log('plant is finished')
     console.log('trigger pick new plant')
-    await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
+
+    await axios.patch(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
     
   }
 

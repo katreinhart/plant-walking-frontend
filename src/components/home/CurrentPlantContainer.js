@@ -12,7 +12,11 @@ class CurrentPlantContainer extends React.Component {
     const plantFrame = Math.floor((this.props.steps_recorded/this.props.steps_required) * 39) + 1
     return (
       <div className="plant-container justify-center">
-        <img className="plant-image" alt="current plant" src={`./images/plant-${currentPlantTypeId}/plant-${currentPlantTypeId}-${plantFrame}.png`} />
+        { this.props.currentPlantTypeId 
+          ? <img className="plant-image" alt="current plant" src={`./images/plant-${currentPlantTypeId}/plant-${currentPlantTypeId}-${plantFrame}.png`} />
+          : <div>loading... </div>
+        }
+        
       </div>
     )
   }

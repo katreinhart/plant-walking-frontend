@@ -7,6 +7,7 @@ import HomePlant from './components/home/HomePlant'
 import Menu from './components/menu/Menu'
 import History from './components/history/History'
 import EditSteps from './components/forms/EditSteps'
+
 import DeleteSteps from './components/forms/DeleteSteps'
 import SignUp from './components/welcome/SignUp'
 import LogIn from './components/welcome/LogIn'
@@ -60,7 +61,7 @@ class App extends Component {
     const input = e.target.querySelector('.input-field')
     const stepsAdded = parseInt(input.value, 10)
     input.value = ''
- 
+
     const body = {
       user_id: this.state.currentUserId,
       number_of_steps: stepsAdded
@@ -92,7 +93,7 @@ class App extends Component {
 
       if(!plantInstanceId) {
         console.log('We need to pick a plant!')
-        nextState.triggerPickPlant = true 
+        nextState.triggerPickPlant = true
       }
 
       // this is all kinda hacky stuff to keep track of whether/which user is logged in
@@ -116,7 +117,7 @@ class App extends Component {
         currentPlantTypeId: plant_types_id,
         currentPlantStepsProgress: progress,
       })
-      // adding this line fixed the sign in bug where no plant showed up. 
+      // adding this line fixed the sign in bug where no plant showed up.
       console.log('signed in')
       await this.updateProgressState()
     }
@@ -158,14 +159,14 @@ class App extends Component {
       const {
         data: {
           plant_instance: {
-            user_id,
+            currentUserId,
             plant_types_id,
             progress,
             id: plant_instance_id
           }
         }
       } = await axios.get(`${localhostURL}/plant-instances/${plantInstanceId}`)
-  
+
       const {
         data: {
           plant: {
@@ -175,7 +176,7 @@ class App extends Component {
       } = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
 
       const prevState = Object.assign({}, this.state)
-      
+
       await this.setState({
         ...prevState,
         triggerPickPlant: nextState.triggerPickPlant,
@@ -191,7 +192,7 @@ class App extends Component {
     e.preventDefault()
 
     console.log('You have chosen plant number', e.target.id)
-    
+
     const selectedPlantType = parseInt(e.target.id, 10)
     const userId = this.state.currentUserId
     await this.updateSelectedPlantInfo({ selectedPlantType })
@@ -213,7 +214,7 @@ class App extends Component {
     const userId = localStorage.getItem('user_id')
     const body = { user_id: userId, plant_types_id: selectedPlantType }
     const response = await axios.patch(`${localhostURL}/user-profiles/${userId}`, body)
- 
+
     const {
       id: plant_instance_id
     } = response.data.result[0]
@@ -231,7 +232,7 @@ class App extends Component {
 
   async getUserInformation() {
 // use to retrieve current user info (email, id, current plant id)
-    const userId = localStorage.getItem('user_id') 
+    const userId = localStorage.getItem('user_id')
     if(!userId) {
       console.log('This is an error, you should not be logged in')
     } else {
@@ -242,7 +243,7 @@ class App extends Component {
       const { data: { response }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
       const { id, plant_instances_id } = response[0]
 
-      nextState.triggerPickPlant = plant_instances_id ? false : true 
+      nextState.triggerPickPlant = plant_instances_id ? false : true
 
       const prevState = Object.assign({}, this.state)
       await this.setState({
@@ -260,8 +261,13 @@ class App extends Component {
     const plantInstanceId = this.state.currentPlantInstanceId
     console.log('plant is finished')
     console.log('trigger pick new plant')
+<<<<<<< HEAD
     await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
     
+=======
+    // await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
+    // this API call needs to be created.
+>>>>>>> 002c4148b6d155690733139c390cad49943ff26c
   }
 
   render() {

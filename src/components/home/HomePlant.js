@@ -23,6 +23,7 @@ class HomePlant extends React.Component {
   }
 
   render() {
+    console.log(this.props.currentPlantStepsProgress, this.props.currentPlantStepsRequired, "progress and required");
     if(!this.props.currentPlantInstanceId) {
       // turning this back on with caution ...
       return <Redirect to={'/pickseed'} />
@@ -30,7 +31,8 @@ class HomePlant extends React.Component {
     else return (
       <div className="outermost-container">
         <Navigation />
-        <CurrentPlantContainer currentPlantTypeId={ this.props.currentPlantTypeId } steps_recorded={ this.props.currentPlantStepsProgress } steps_required={ this.props.currentPlantStepsRequired } newSteps={ this.state.stepsInput }/>
+        <CurrentPlantContainer currentPlantTypeId={ this.props.currentPlantTypeId }
+          steps_recorded={ this.props.currentPlantStepsProgress } steps_required={ this.props.currentPlantStepsRequired } newSteps={ this.state.stepsInput }/>
         <ProgressBar percent={ (parseInt(this.props.currentPlantStepsProgress, 10) / parseInt(this.props.currentPlantStepsRequired, 10) * 100) } />
         <AddStepsContainer addSteps={ (e)=>{
           this.getStepsInput(e)

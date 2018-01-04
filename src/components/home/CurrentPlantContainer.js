@@ -11,10 +11,11 @@ class CurrentPlantContainer extends React.Component {
     }
   }
 
-  componentDidMount(){
-    const goalFrame = Math.floor(((this.props.steps_recorded/this.props.steps_required) * 38) + 1)
-    this.setState({...this.state, goalFrame})
-  }
+  // componentDidMount(){
+  //   const goalFrame = Math.floor(((this.props.steps_recorded/this.props.steps_required) * 38) + 1)
+  //   console.log(this.props.steps_recorded, this.props.steps_required, "HIIIIII");
+  //   this.setState({...this.state, goalFrame, currentFrame: this.state.goalFrame})
+  // }
 
   calculatePlantFrame(){
     setTimeout(() => {
@@ -26,6 +27,10 @@ class CurrentPlantContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
+    const goalFrame = Math.floor(((this.props.steps_recorded/this.props.steps_required) * 38) + 1)
+    console.log(this.props.steps_recorded, this.props.steps_required, "HIIIIII");
+    this.setState({...this.state, goalFrame, currentFrame: goalFrame})
+    console.log(goalFrame, "goalFrame");
     if(nextProps.newSteps > 0){
       const newGoalSteps = this.props.steps_recorded + nextProps.newSteps
 

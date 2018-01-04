@@ -34,7 +34,7 @@ This web app is also ripe for social sharing. We'd like to make it easy for user
 -JavaScript  \
 -React.js  \
 -Node.js, Express.js, Knex.js  \
--PostgreSQL  \
+-PostgreSQL  
 
 ## INSTALLATION
 To run this locally:

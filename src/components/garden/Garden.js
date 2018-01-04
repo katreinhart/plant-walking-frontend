@@ -15,9 +15,7 @@ class Garden extends Component {
 
 
   async componentDidMount(){
-    console.log('user id', this.props.user_id);
     let {data: {garden}} = await axios.get(`${backendURL}/plant-instances/garden/${this.props.user_id}`)
-    console.log('garden', garden);
     this.setState({completedPlants:garden})
   }
 
@@ -27,8 +25,6 @@ class Garden extends Component {
     while(myPlants.length < 16) {
       myPlants.push({})
     }
-
-    console.log(myPlants)
 
     return (
       <div className="outermost-container">

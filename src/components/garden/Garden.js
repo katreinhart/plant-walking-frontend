@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Navigation from '../shared/Navigation'
 import BackToPlant from './BackToPlant'
-
+import Grid from 'react-css-grid'
 const localhostURL = 'http://localhost:2999/api'
 
 class Garden extends Component {
@@ -39,8 +39,8 @@ class Garden extends Component {
           </Link>
         </div>
 
-        <Grid 
-          width={'25vw'} 
+        <Grid
+          width={'25vw'}
           gap={0}
         >
         {
@@ -51,7 +51,7 @@ class Garden extends Component {
             )
           })
         }
-        
+
         </Grid>
       </div>
      )

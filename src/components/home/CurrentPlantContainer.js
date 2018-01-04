@@ -5,17 +5,14 @@ class CurrentPlantContainer extends React.Component {
     super(props)
   }
 
-  componentDidMount () {
-    // api call to retrieve current plant if it was not passed down
-    // axios.get()
-  }
 
   render () {
-    console.log(this.props.currentPlantTypeId, "current plant type id");
+    console.log(this.props, "PROPS");
     const currentPlantTypeId = this.props.currentPlantTypeId
+    const plantFrame = Math.floor((this.props.steps_recorded/this.props.steps_required) * 9) + 1
     return (
       <div className ="plant-container">
-        <img className ="plant-image" alt="current plant" src={`./images/plant-${currentPlantTypeId}/plant-${currentPlantTypeId}-1.png`} />
+        <img className ="plant-image" alt="current plant" src={`./images/plant-${currentPlantTypeId}/plant-${currentPlantTypeId}-${plantFrame}.png`} />
       </div>
     )
   }
@@ -23,6 +20,7 @@ class CurrentPlantContainer extends React.Component {
 
 export default CurrentPlantContainer
 
+//(stepsRecorded / stepsRequired ) * 40 ..math.floor
 // stepsRecorded -> 50
 // endSteps -> 100
 // 50 / 100

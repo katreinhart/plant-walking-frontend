@@ -61,7 +61,7 @@ class App extends Component {
     const input = e.target.querySelector('.input-field')
     const stepsAdded = parseInt(input.value, 10)
     input.value = ''
- 
+
     const body = {
       user_id: this.state.currentUserId,
       number_of_steps: stepsAdded
@@ -159,7 +159,7 @@ class App extends Component {
       const {
         data: {
           plant_instance: {
-            user_id,
+            currentUserId,
             plant_types_id,
             progress,
             id: plant_instance_id
@@ -262,7 +262,7 @@ class App extends Component {
     console.log('plant is finished')
     console.log('trigger pick new plant')
     // await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
-    // this API call needs to be created. 
+    // this API call needs to be created.
   }
 
   render() {

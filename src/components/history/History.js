@@ -13,11 +13,10 @@ class History extends Component {
   async componentDidMount(){
     let steps = await axios.get(`${backendURL}/steps/${this.props.user_id}`)
     let stepsArr = steps.data.response
-    let stepHolder=[]
-    stepsArr.map(step => {
+    let stepHolder = stepsArr.map(step => {
       let date = new Date(step.created_at).toLocaleDateString()
       let stepObj = {date:date, steps:step.number_of_steps, step_id:step.id}
-      stepHolder.push(stepObj)
+      return stepObj
     })
     this.setState({steps:stepHolder})
   }

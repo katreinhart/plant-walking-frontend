@@ -1,8 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import axios from 'axios'
-
-import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
 

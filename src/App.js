@@ -14,7 +14,6 @@ import LogIn from './components/welcome/LogIn'
 import Welcome from './components/welcome/Welcome'
 import PickSeed from './components/forms/PickSeed'
 import Profile from './components/profile/Profile'
-import AnimatePlant from './components/home/AnimatePlant'
 const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
 
 class App extends Component {
@@ -66,8 +65,9 @@ class App extends Component {
       user_id: this.state.currentUserId,
       number_of_steps: stepsAdded
     }
-    console.log(body)
-    const response = await axios.post(`${backendURL}/steps`, body)
+
+    await axios.post(`${backendURL}/steps`, body)
+
     await this.updateProgressState()
   }
 
@@ -81,7 +81,6 @@ class App extends Component {
 
     try {
       const response = await axios.post(`${backendURL}/users/login`, body)
-      console.log(response.data)
       const {
         token,
         email,
@@ -92,7 +91,6 @@ class App extends Component {
       } = response.data
 
       if(!plantInstanceId) {
-        console.log('We need to pick a plant!')
         nextState.triggerPickPlant = true
       }
 
@@ -117,15 +115,14 @@ class App extends Component {
         currentPlantTypeId: plant_types_id,
         currentPlantStepsProgress: progress,
       })
-      // adding this line fixed the sign in bug where no plant showed up.
-      console.log('signed in')
+
       await this.updateProgressState()
     }
 
     catch(error){
-      console.log( 'errors', error);
-      const prevState = Object.assign({}, this.state)
+      console.log( 'errors', error)
       this.setState({
+        ...this.state,
         loginError: true,
         triggerPickPlant: false,
         authenticated: false,
@@ -151,7 +148,6 @@ class App extends Component {
     const nextState = {}
 
     if(userId && !plantInstanceId) {
-      console.log('We need to pick you a plant... says the updateProgressState function')
       nextState.triggerPickPlant = true
     } else if (!userId) {
       console.log('no logged in user')
@@ -165,7 +161,6 @@ class App extends Component {
           }
         }
       } = await axios.get(`${backendURL}/plant-instances/${plantInstanceId}`)
-      console.log('first axios call returns:', userId, plant_instance_id)
       const {
         data: {
           plant: {
@@ -189,11 +184,7 @@ class App extends Component {
 
   async handleSelectSeed (e) {
     e.preventDefault()
-
-    console.log('You have chosen plant number', e.target.id)
-
     const selectedPlantType = parseInt(e.target.id, 10)
-    const userId = this.state.currentUserId
     await this.updateSelectedPlantInfo({ selectedPlantType })
 
     const prevState = Object.assign({}, this.state)
@@ -209,11 +200,9 @@ class App extends Component {
   }
 
   async updateSelectedPlantInfo({ selectedPlantType }) {
-    console.log('update selected plant type to', selectedPlantType)
     const userId = localStorage.getItem('user_id')
     const body = { user_id: userId, plant_types_id: selectedPlantType }
     const response = await axios.patch(`${backendURL}/user-profiles/${userId}`, body)
-    console.log(response)
     const {
       plant_instances_id: plant_instance_id,
 
@@ -259,8 +248,6 @@ class App extends Component {
 
   async currentPlantIsFinished() {
     const plantInstanceId = this.state.currentPlantInstanceId
-    console.log('plant is finished')
-    console.log('trigger pick new plant')
 
     await axios.patch(`${backendURL}/plant-instances/${plantInstanceId}`, { completed: true })
     

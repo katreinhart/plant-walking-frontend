@@ -1,5 +1,4 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
 
 const GreenButton = ({ text, clickHandler, id }) => {
   return (

@@ -2,10 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const HistoryItem = ({step, editSteps}) => {
-  function fireEditSteps(){
-    // console.log('Hi', step);
-    editSteps(step)
-  }
+  
   return (
     <div>
       <div className="history-item">

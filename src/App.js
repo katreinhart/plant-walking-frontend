@@ -47,6 +47,7 @@ class App extends Component {
     this.handleAddSteps = this.handleAddSteps.bind(this)
     this.handleSignInClick = this.handleSignInClick.bind(this)
     this.handleSelectSeed = this.handleSelectSeed.bind(this)
+    this.currentPlantIsFinished = this.currentPlantIsFinished.bind(this)
   }
 
   async componentDidMount() {
@@ -60,7 +61,7 @@ class App extends Component {
     const input = e.target.querySelector('.input-field')
     const stepsAdded = parseInt(input.value, 10)
     input.value = ''
-
+ 
     const body = {
       user_id: this.state.currentUserId,
       number_of_steps: stepsAdded
@@ -256,6 +257,14 @@ class App extends Component {
     }
   }
 
+  async currentPlantIsFinished() {
+    const plantInstanceId = this.state.currentPlantInstanceId
+    console.log('plant is finished')
+    console.log('trigger pick new plant')
+    // await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
+    // this API call needs to be created. 
+  }
+
   render() {
 
     return (
@@ -264,6 +273,7 @@ class App extends Component {
           <PrivateRoute path='/' exact
             component={ HomePlant }
             handleAddSteps={this.handleAddSteps}
+            currentPlantIsFinished={ this.currentPlantIsFinished }
             currentPlantInstanceId={ this.state.currentPlantInstanceId }
             currentPlantStepsProgress={this.state.currentPlantStepsProgress}
             currentPlantStepsRequired={this.state.currentPlantStepsRequired}
@@ -287,6 +297,8 @@ class App extends Component {
             component={ PickSeed }
             handleSelect={ this.handleSelectSeed }
             currentPlantID={ this.state.currentPlantInstanceId }
+            currentPlantStepsProgress={ this.state.currentPlantStepsProgress }
+            currentPlantStepsRequired={ this.state.currentPlantStepsRequired }
           />
           <PrivateRoute path='/profile' component={ Profile } />
           <PrivateRoute path='/logout' component={ LogOut } />

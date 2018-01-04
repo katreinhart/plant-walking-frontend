@@ -59,7 +59,9 @@ class SignUp extends Component {
             <GreenButton text="sign up" htmlFor='submit'/>
           </div>
         </form>
-        <Link to='/login'>Already registered? Click here!</Link>
+        <p className="text-ctr">
+          <Link to='/login'>Already registered? Click here!</Link>
+        </p>
       </div>
     )
   }

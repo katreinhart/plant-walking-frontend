@@ -66,8 +66,8 @@ class App extends Component {
     }
     console.log('in handle Steps',body)
     const response = await axios.post(`${localhostURL}/steps`, body)
-    this.updateProgressState(body.number_of_steps)
-
+    this.updateProgressState()
+    return stepsAdded
   }
 
   async handleSignInClick(e) {

@@ -11,6 +11,7 @@ const HomePlant = ({ plant_id, steps_required, steps_recorded, addSteps, current
   // if(!plant_id) {
   //   return (<Redirect to='/pickseed' />)
   // } else
+  console.log(addSteps);
   return (
     <div className="outermost-container">
       <Navigation />

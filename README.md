@@ -30,11 +30,11 @@ Currently, users must input their steps to make the plant grow. Our vision for t
 This web app is also ripe for social sharing. We'd like to make it easy for users to share their plants with friends.  
 
 ## BUILT WITH
--HTML5, CSS3  
--JavaScript  
--React.js  
--Node.js, Express.js, Knex.js  
--PostgreSQL  
+-HTML5, CSS3  \
+-JavaScript  \
+-React.js  \
+-Node.js, Express.js, Knex.js  \
+-PostgreSQL  \
 
 ## INSTALLATION
 To run this locally:

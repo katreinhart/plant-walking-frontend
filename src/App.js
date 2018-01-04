@@ -16,10 +16,6 @@ import Profile from './components/profile/Profile'
 import AnimatePlant from './components/home/AnimatePlant'
 const localhostURL = 'http://localhost:2999/api'
 
-// Why isn't the same thing happening when the user logs in as when the component is loaded?
-// That should be a similar experience for user - coming to the page as a returning user vs. new signup.
-// How is the pick plant interaction going to be triggered? 
-
 class App extends Component {
   constructor() {
     super()
@@ -187,7 +183,6 @@ class App extends Component {
         currentPlantStepsRequired: steps_required,
         currentPlantStepsProgress: progress
       })
-      console.log('updateProgressState', this.state.currentPlantInstanceId, this.state.currentPlantTypeId)
     }
   }
 

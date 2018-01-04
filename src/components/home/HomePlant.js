@@ -55,16 +55,20 @@ class HomePlant extends React.Component {
     else return (
       <div className="outermost-container">
         <Navigation />
-        <CurrentPlantContainer currentPlantTypeId={ this.props.currentPlantTypeId }
-          steps_recorded={ this.props.currentPlantStepsProgress } steps_required={ this.props.currentPlantStepsRequired } newSteps={ this.state.stepsInput }/>
+        <CurrentPlantContainer 
+          currentPlantTypeId={ this.props.currentPlantTypeId }
+          steps_recorded={ this.props.currentPlantStepsProgress }
+          steps_required={ this.props.currentPlantStepsRequired }
+          newSteps={ this.state.stepsInput }
+        />
         <ProgressBar percent={ (parseInt(this.props.currentPlantStepsProgress, 10) / parseInt(this.props.currentPlantStepsRequired, 10) * 100) } />
         {
           this.state.completed
           ? <LinkToPickPlant />
           : <AddStepsContainer addSteps={(e)=>{
-            this.getStepsInput(e)
-            this.props.handleAddSteps(e)
-          }} />
+              this.getStepsInput(e)
+              this.props.handleAddSteps(e)
+            }} />
         }
         <Link to='/garden'>
           <ViewGarden />

@@ -33,11 +33,12 @@ This web app is also ripe for social sharing. We'd like to make it easy for user
 -HTML5, CSS3  \
 -JavaScript  \
 -React.js  \
+-React Router  \
 -Node.js, Express.js, Knex.js  \
 -PostgreSQL  
 
 ## INSTALLATION
 To run this locally:
 1. Clone both the frontend and backend
-2. Install npm packages, `Npm install`
-3. Start both front and backend servers, `Npm start`
+2. Install npm packages, `npm install`
+3. Start both front and backend servers, `npm start`

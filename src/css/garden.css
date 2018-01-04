@@ -4,7 +4,7 @@
 
 .garden-plant-box {
   background-color: #E8F2F8;
-  width: 100vw;
+  /* width: 100vw; */
   height: 25vw;
   display: flex;
   justify-content: center;

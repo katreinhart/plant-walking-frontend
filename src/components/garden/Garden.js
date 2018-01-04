@@ -16,11 +16,20 @@ class Garden extends Component {
 
   async componentDidMount(){
     console.log('user id', this.props.user_id);
-    let garden = await axios.get(`${localhostURL}/plant-instances/garden/${this.props.user_id}`)
+    let {data: {garden}} = await axios.get(`${localhostURL}/plant-instances/garden/${this.props.user_id}`)
     console.log('garden', garden);
     this.setState({completedPlants:garden})
   }
+
+
   render() {
+    const myPlants = [...this.state.completedPlants]
+    while(myPlants.length < 16) {
+      myPlants.push({})
+    }
+
+    console.log(myPlants)
+
     return (
       <div className="outermost-container">
         <Navigation />
@@ -32,14 +41,13 @@ class Garden extends Component {
 
         <Grid 
           width={'25vw'} 
+          gap={0}
         >
         {
-          this.state.completedPlants.map(plant => {
-            const className = [5,6,7,8,13,14,15,16].includes(plant) ? "even-plant-row" : "odd-plant-row"
+          myPlants.map((plant, i) => {
+            const className = [4,5,6,7,12,13,14,15].includes(i) ? "even-plant-row" : "odd-plant-row"
             return (
-              <div className={"garden-plant-box " + className }>
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
+              <GardenPlant index={i} className={className} displayImage={plant.plant_types_id}/>
             )
           })
         }
@@ -50,71 +58,10 @@ class Garden extends Component {
   }
 }
 
+const GardenPlant = ({index, className, displayImage }) => (
+  <div key={index} className={"garden-plant-box " + className }>
+    { displayImage && <img src='./images/plant-1-completed.png' width='50%'/> }
+  </div>
+)
+
 export default Garden;
-
-
-/*
-
-<div className="garden-container mt-5">
-            <div className="garden-row">
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-            </div>
-
-            <div className="garden-row">
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-            </div>
-
-            <div className="garden-row">
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box odd-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-            </div>
-
-            <div className="garden-row">
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-              <div className="garden-plant-box even-plant-row">
-                <i className=" plant material-icons">insert_emoticon</i>
-              </div>
-            </div>
-          </div>
-
-        */

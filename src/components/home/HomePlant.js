@@ -23,7 +23,6 @@ class HomePlant extends React.Component {
   }
 
   render() {
-    console.log(this.props.currentPlantStepsProgress, this.props.currentPlantStepsRequired, "progress and required");
     if(!this.props.currentPlantInstanceId) {
       // turning this back on with caution ...
       return <Redirect to={'/pickseed'} />

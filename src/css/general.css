@@ -17,8 +17,12 @@ nav {
   color: #fff;
 }
 
-.brand, .hamburger {
+.hamburger {
   color: #fff;
+}
+
+.brand a {
+  color: #bc859e;
 }
 
 a {

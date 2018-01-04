@@ -5,7 +5,7 @@ const Navigation = () => {
   return (
     <nav>
       <Link to='/' className='brand'>
-        brand
+        Garden Walk
       </Link>
       <Link to='/menu'>
         <i className="material-icons hamburger">menu</i>

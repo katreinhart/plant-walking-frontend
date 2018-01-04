@@ -14,7 +14,7 @@ const HomePlant = ({ plant_id, steps_required, steps_recorded, addSteps, current
   return (
     <div className="outermost-container">
       <Navigation />
-      <CurrentPlantContainer currentPlantTypeId={ currentPlantTypeId }/>
+      <CurrentPlantContainer currentPlantTypeId={ currentPlantTypeId } steps_recorded={ steps_recorded } steps_required={ steps_required }/>
       <ProgressBar percent={ (parseInt(steps_recorded, 10) / parseInt(steps_required, 10) * 100) } />
       <AddStepsContainer addSteps={ addSteps } />
       <Link to='/garden'>

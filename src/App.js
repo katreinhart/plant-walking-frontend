@@ -7,6 +7,7 @@ import HomePlant from './components/home/HomePlant'
 import Menu from './components/menu/Menu'
 import History from './components/history/History'
 import EditSteps from './components/forms/EditSteps'
+
 import DeleteSteps from './components/forms/DeleteSteps'
 import SignUp from './components/welcome/SignUp'
 import LogIn from './components/welcome/LogIn'

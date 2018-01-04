@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 
 class TextInput extends Component {
-  state = {}
+  constructor(props){
+    super(props)
+  }
   render() {
     return (
       <div className="input-container">
-        <input className="input-field" type="text" />
+        <input id='editedStepInput' className="input-field" type="text" defaultValue={this.props.oldSteps}/>
       </div>
     )
   }

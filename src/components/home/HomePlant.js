@@ -47,7 +47,7 @@ class HomePlant extends React.Component {
       (this.props.currentPlantStepsProgress >= this.props.currentPlantStepsRequired)) {
       // if there are values for steps required and progress, and progress is greater than or equal to required, plant is done
       this.props.currentPlantIsFinished()
-    } 
+    }
     if(!this.props.currentPlantInstanceId) {
       // turning this back on with caution...
       return <Redirect to={'/pickseed'} />

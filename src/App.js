@@ -159,14 +159,13 @@ class App extends Component {
       const {
         data: {
           plant_instance: {
-            currentUserId,
             plant_types_id,
             progress,
             id: plant_instance_id
           }
         }
       } = await axios.get(`${localhostURL}/plant-instances/${plantInstanceId}`)
-
+      console.log('first axios call returns:', userId, plant_instance_id)
       const {
         data: {
           plant: {
@@ -214,9 +213,10 @@ class App extends Component {
     const userId = localStorage.getItem('user_id')
     const body = { user_id: userId, plant_types_id: selectedPlantType }
     const response = await axios.patch(`${localhostURL}/user-profiles/${userId}`, body)
-
+    console.log(response)
     const {
-      id: plant_instance_id
+      plant_instances_id: plant_instance_id,
+
     } = response.data.result[0]
 
     const prevState = Object.assign({}, this.state)
@@ -244,8 +244,8 @@ class App extends Component {
       const { id, plant_instances_id } = response[0]
 
       nextState.triggerPickPlant = plant_instances_id ? false : true
-
       const prevState = Object.assign({}, this.state)
+
       await this.setState({
         ...prevState,
         ...nextState,
@@ -261,13 +261,8 @@ class App extends Component {
     const plantInstanceId = this.state.currentPlantInstanceId
     console.log('plant is finished')
     console.log('trigger pick new plant')
-<<<<<<< HEAD
     await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
     
-=======
-    // await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
-    // this API call needs to be created.
->>>>>>> 002c4148b6d155690733139c390cad49943ff26c
   }
 
   render() {

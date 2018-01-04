@@ -11,7 +11,6 @@ class History extends Component {
   }
 
   async componentDidMount(){
-    console.log(this.props.user_id );
     let steps = await axios.get(`${localhostURL}/steps/${this.props.user_id}`)
     console.log('history steps', steps.data.response);
     let stepsArr = steps.data.response
@@ -23,11 +22,12 @@ class History extends Component {
       stepHolder.push(stepObj)
     })
     this.setState({steps:stepHolder})
-    console.log('Make history', stepHolder);
+    console.log('Make history', this.state.steps);
   }
 
-  async editSteps(){
-    console.log('yay edity');
+  async editSteps(step){
+    console.log('yay edity', step);
+
 
   }
 

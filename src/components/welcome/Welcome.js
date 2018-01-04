@@ -10,8 +10,8 @@ const Welcome = () => {
   } else {
     return (
       <div className="splash-container">
-        <img className="splash-image" src="./images/grown_plant.png" alt="A plant"/>
-  
+        <img className="splash-image" src="./images/plant-1-completed.png" alt="A plant"/>
+
         <div className="buttons-container">
           <Link to='/signup' style={{width: '95%'}}>
             <GreenButton text="sign up" />

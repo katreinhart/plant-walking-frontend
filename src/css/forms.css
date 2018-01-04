@@ -63,6 +63,7 @@
   color: #C00156;
   margin: 1em;
   padding-left: 0.25em;
+  text-align: center;
 }
 
 #date {
@@ -82,6 +83,6 @@
 .signup-success {
   margin-left: 1em;
   margin-top: 1em;
-  
+
   color: #768F3E;
 }

@@ -11,12 +11,6 @@ class CurrentPlantContainer extends React.Component {
     }
   }
 
-  // componentDidMount(){
-  //   const goalFrame = Math.floor(((this.props.steps_recorded/this.props.steps_required) * 38) + 1)
-  //   console.log(this.props.steps_recorded, this.props.steps_required, "HIIIIII");
-  //   this.setState({...this.state, goalFrame, currentFrame: this.state.goalFrame})
-  // }
-
   calculatePlantFrame(){
     setTimeout(() => {
       this.setState({
@@ -26,15 +20,20 @@ class CurrentPlantContainer extends React.Component {
     }, 150)
   }
 
+  calculateFrameNumber(stepsRecorded, stepsRequired){
+    const currentFrame = Math.floor(((this.props.steps_recorded/this.props.steps_required) * 38) + 1)
+    return Math.min(currentFrame, 40)
+  }
+
   componentWillReceiveProps(nextProps){
-    const goalFrame = Math.floor(((this.props.steps_recorded/this.props.steps_required) * 38) + 1)
-    console.log(this.props.steps_recorded, this.props.steps_required, "HIIIIII");
+    const goalFrame = this.calculateFrameNumber(this.props.steps_recorded, this.props.steps_required)
+
     this.setState({...this.state, goalFrame, currentFrame: goalFrame})
-    console.log(goalFrame, "goalFrame");
+
     if(nextProps.newSteps > 0){
       const newGoalSteps = this.props.steps_recorded + nextProps.newSteps
 
-      const newGoalFrame = Math.floor(((newGoalSteps/this.props.steps_required)* 38) + 1)
+      const newGoalFrame = this.calculateFrameNumber(newGoalSteps, this.props.steps_required)
 
       this.setState({...this.state, goalFrame: newGoalFrame})
     }

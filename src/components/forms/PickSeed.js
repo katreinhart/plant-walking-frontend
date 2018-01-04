@@ -14,6 +14,7 @@ const localhostURL = 'http://localhost:2999/api'
 class PickSeed extends Component {
   constructor() {
     super()
+    console.log('pick seed component constructor')
     this.state = {
       plants: []
     }
@@ -44,7 +45,6 @@ class PickSeed extends Component {
   }
 
   render() {
-    console.log(this.props.currentPlantID, 'sdsaf', this.state.plants)
     if(this.props.currentPlantID) {
       // don't display pick seed if user has a plant
       return (<Redirect to='/' />)

@@ -19,7 +19,6 @@ const localhostURL = 'http://localhost:2999/api'
 // Why isn't the same thing happening when the user logs in as when the component is loaded?
 // That should be a similar experience for user - coming to the page as a returning user vs. new signup.
 // How is the pick plant interaction going to be triggered? 
-// 
 
 class App extends Component {
   constructor() {
@@ -78,8 +77,9 @@ class App extends Component {
     e.preventDefault()
     const email = e.target.querySelectorAll('input')[0].value
     const password = e.target.querySelectorAll('input')[1].value
-
     const body = { email, password }
+
+    const nextState = {}
 
     try {
       const response = await axios.post(`${localhostURL}/users/login`, body)
@@ -95,7 +95,7 @@ class App extends Component {
 
       if(!plantInstanceId) {
         console.log('We need to pick a plant!')
-        // render pick plant display 
+        nextState.triggerPickPlant = true 
       }
 
       // this is all kinda hacky stuff to keep track of whether/which user is logged in
@@ -106,8 +106,9 @@ class App extends Component {
       // set state to new values
       const prevState = Object.assign({}, this.state)
 
-      this.setState({
+      await this.setState({
         ...prevState,
+        ...nextState,
         authenticated: true,
         loginError: false,
         triggerPickPlant: false,
@@ -118,34 +119,43 @@ class App extends Component {
         currentPlantTypeId: plant_types_id,
         currentPlantStepsProgress: progress,
       })
+      // adding this line fixed the sign in bug where no plant showed up. 
+      await this.updateProgressState()
     }
 
     catch(error){
       console.log( 'errors', error);
       const prevState = Object.assign({}, this.state)
-      // here is a question... this is overwriting state since there was an error with login. 
-      // should this be resetting values to default (like in constructor) or erasing them (as it is now)?
       this.setState({
         loginError: true,
+        triggerPickPlant: false,
         authenticated: false,
+        currentUserId: null,
+        currentUserEmail: '',
+        currentUserDisplay: '',
+        currentPlantTypeId: null,
+        currentPlantInstanceId: null,
+        currentPlantStepsRequired: null,
+        currentPlantStepsProgress: null
       })
     }
   }
 
 
   async updateProgressState() {
-    console.log('updateProgressState', this.state.currentPlantInstanceId)
+    // takes current plant instance id and user Id from state
+    // makes API calls to get the plant instance and the plant type info
+    // stores this info in state
+
     const plantInstanceId = this.state.currentPlantInstanceId
-    // if this is null/undefined, what will happen?
-    // This is the case where we would need to trigger the pick seed interaction. 
-    
-    if(!plantInstanceId) {
+    const userId = this.state.currentUserId
+    const nextState = {}
+
+    if(userId && !plantInstanceId) {
       console.log('We need to pick you a plant... says the updateProgressState function')
-      const prevState = Object.assign({}, this.state)
-      this.setState({
-        ...prevState,
-        triggerPickPlant: true
-      })
+      nextState.triggerPickPlant = true
+    } else if (!userId) {
+      console.log('no logged in user')
     } else {
       const {
         data: {
@@ -156,9 +166,7 @@ class App extends Component {
             id: plant_instance_id
           }
         }
-        // when plantInstanceId was null, this axios call just hangs forever...
       } = await axios.get(`${localhostURL}/plant-instances/${plantInstanceId}`)
-      console.log('first axios call done')
   
       const {
         data: {
@@ -167,12 +175,12 @@ class App extends Component {
           }
         }
       } = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
-      // ... causing nothing else in this function to EVER happen. 
-      console.log(user_id, plant_types_id, progress, plant_instance_id, steps_required)
+
       const prevState = Object.assign({}, this.state)
   
       this.setState({
         ...prevState,
+        triggerPickPlant: nextState.triggerPickPlant,
         currentPlantInstanceId: plant_instance_id,
         currentPlantTypeId: plant_types_id,
         currentPlantStepsRequired: steps_required,
@@ -183,13 +191,15 @@ class App extends Component {
 
   async handleSelectSeed (e) {
     e.preventDefault()
-    console.log('You have chosen plant number', e.target.id)
-    const selectedPlantId = parseInt(e.target.id, 10)
-    const userId = this.state.currentUserId
 
-    await this.updateSelectedPlantInfo({ selectedPlantId })
+    console.log('You have chosen plant number', e.target.id)
+    
+    const selectedPlantType = parseInt(e.target.id, 10)
+    const userId = this.state.currentUserId
+    await this.updateSelectedPlantInfo({ selectedPlantType })
+
     const prevState = Object.assign({}, this.state)
-    this.setState({
+    await this.setState({
       ...prevState,
       triggerPickPlant: false
     })
@@ -199,55 +209,51 @@ class App extends Component {
     // change a user's display name or password (STRETCH)
   }
 
-  async updateSelectedPlantInfo({ selectedPlantId }) {
+  async updateSelectedPlantInfo({ selectedPlantType }) {
     // make db call to update user's current plant to the new plant type specified
-    console.log(selectedPlantId)
+    console.log('update selected plant type to', selectedPlantType)
     const userId = localStorage.getItem('user_id')
-    const body = { user_id: userId, plant_types_id: selectedPlantId }
-    console.log(body)
+    const body = { user_id: userId, plant_types_id: selectedPlantType }
     const response = await axios.patch(`${localhostURL}/user-profiles/${userId}`, body)
-    console.log(response)
+ 
     const {
-      plant_types_id,
       id: plant_instance_id
     } = response.data.result[0]
 
-    console.log(plant_types_id, plant_instance_id)
+    // console.log('plant update function', 'type', selectedPlantType, 'instance', plant_instance_id)
     const prevState = Object.assign({}, this.state)
-    this.setState({
+    await this.setState({
       ...prevState,
       currentPlantInstanceId: plant_instance_id,
-      currentPlantTypeId: plant_types_id,
+      currentPlantTypeId: selectedPlantType,
       currentPlantStepsProgress: 0
     })
+
+    await this.updateProgressState()
   }
 
   async getUserInformation() {
 // use to retrieve current user info (email, id, current plant id)
-    const userId = localStorage.getItem('user_id') /// <--- this is not getting set anywhere, so of course it can't find anything
-    console.log(this.state.currentUserId)
-    console.log(userId)
+    const userId = localStorage.getItem('user_id') 
     if(!userId) {
-
+      console.log('This is an error, you should not be logged in')
     } else {
+      const nextState = {
+        currentUserId: userId
+      }
+
       const { data: { response }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
       const { id, plant_instances_id } = response[0]
-      if(!plant_instances_id) {
-        console.log('We need to pick you a plant!')
-        const prevState = Object.assign({}, this.state)
-        this.setState({
-          ...prevState, 
-          triggerPickPlant: true
-        })
-      } else {
-        console.log(id, "id", plant_instances_id, "plant_instances_id")
-        const prevState = Object.assign({}, this.state)
-        this.setState({
-          ...prevState,
-          currentUserId: id,
-          currentPlantInstanceId: plant_instances_id
-        })      
-      }
+
+      nextState.triggerPickPlant = plant_instances_id ? false : true 
+
+      const prevState = Object.assign({}, this.state)
+      this.setState({
+        ...prevState,
+        ...nextState,
+        currentUserId: id,
+        currentPlantInstanceId: plant_instances_id
+      })
     }
   }
 

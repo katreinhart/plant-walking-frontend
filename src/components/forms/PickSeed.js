@@ -14,6 +14,7 @@ const localhostURL = 'http://localhost:2999/api'
 class PickSeed extends Component {
   constructor() {
     super()
+    console.log('pick seed component constructor')
     this.state = {
       plants: []
     }
@@ -21,15 +22,15 @@ class PickSeed extends Component {
     this.handlePrev = this.handlePrev.bind(this)
   }
 
-  componentDidMount() {
-    this.retrievePlantTypes()
-    // console.log(this.state.plants)
+  async componentDidMount() {
+    await this.retrievePlantTypes()
+    console.log(this.state.plants)
   }
 
   async retrievePlantTypes() {
     const response = await axios.get(`${localhostURL}/plant-types`)
-    this.setState({
-      plants: response.data.plants
+    await this.setState({
+      plants: [...response.data.plants]
     })
   }
 
@@ -44,7 +45,6 @@ class PickSeed extends Component {
   }
 
   render() {
-    // console.log(this.props.currentPlantID)
     if(this.props.currentPlantID) {
       // don't display pick seed if user has a plant
       return (<Redirect to='/' />)

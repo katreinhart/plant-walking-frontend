@@ -8,7 +8,7 @@ import AddStepsContainer from './AddStepsContainer'
 import ViewGarden from '../garden/ViewGarden'
 
 const HomePlant = ({ plant_id, steps_required, steps_recorded, addSteps, currentPlantTypeId }) => {
-  // if(!plant_id) {
+  // if(!currentPlantTypeId ) {
   //   return (<Redirect to='/pickseed' />)
   // } else
   return (

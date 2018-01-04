@@ -19,15 +19,16 @@ class History extends Component {
     stepsArr.map(step => {
       let date = new Date(step.created_at).toLocaleDateString()
       console.log(date, step.number_of_steps);
-      let stepObj = {date:date, steps:step.number_of_steps}
+      let stepObj = {date:date, steps:step.number_of_steps, step_id:step.id}
       stepHolder.push(stepObj)
     })
     this.setState({steps:stepHolder})
-    console.log(stepHolder);
+    console.log('Make history', stepHolder);
   }
 
   async editSteps(){
     console.log('yay edity');
+
   }
 
   render() {

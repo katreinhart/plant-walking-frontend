@@ -65,9 +65,10 @@ class App extends Component {
       user_id: this.state.currentUserId,
       number_of_steps: stepsAdded
     }
-    console.log(body)
+    console.log('in handle Steps',body)
     const response = await axios.post(`${localhostURL}/steps`, body)
-    this.updateProgressState()
+    this.updateProgressState(body.number_of_steps)
+
   }
 
   async handleSignInClick(e) {
@@ -125,7 +126,8 @@ class App extends Component {
   }
 
 
-  async updateProgressState() {
+  async updateProgressState(number_of_steps_added) {
+
     // console.log('updateProgressState', this.state.currentPlantInstanceId)
     const plantInstanceId = this.state.currentPlantInstanceId
 
@@ -155,7 +157,8 @@ class App extends Component {
       currentPlantInstanceId: plant_instance_id,
       currentPlantTypeId: plant_types_id,
       currentPlantStepsRequired: steps_required,
-      currentPlantStepsProgress: progress
+      currentPlantStepsProgress: progress,
+      stepsToGrow:number_of_steps_added
     })
   }
 

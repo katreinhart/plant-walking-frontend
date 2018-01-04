@@ -19,11 +19,16 @@ class History extends Component {
     stepsArr.map(step => {
       let date = new Date(step.created_at).toLocaleDateString()
       console.log(date, step.number_of_steps);
-      let stepObj = {date:date, steps:step.number_of_steps}
+      let stepObj = {date:date, steps:step.number_of_steps, step_id:step.id}
       stepHolder.push(stepObj)
     })
     this.setState({steps:stepHolder})
-    console.log(stepHolder);
+    console.log('Make history', stepHolder);
+  }
+
+  async editSteps(){
+    console.log('yay edity');
+
   }
 
   render() {
@@ -36,7 +41,7 @@ class History extends Component {
           </div>
           <div className="history-list-container">
             <hr></hr>
-            {this.state.steps.map((step, i) => <HistoryItem key={i} step={step}/>)}
+            {this.state.steps.map((step, i) => <HistoryItem key={i} editSteps={this.editSteps} step={step}/>)}
 
 
           </div>

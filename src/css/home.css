@@ -1,6 +1,6 @@
 .plant-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-top: auto;
 }

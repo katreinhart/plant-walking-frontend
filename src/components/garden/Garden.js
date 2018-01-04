@@ -39,8 +39,8 @@ class Garden extends Component {
           </Link>
         </div>
 
-        <Grid 
-          width={'25vw'} 
+        <Grid
+          width={'25vw'}
           gap={0}
         >
         {
@@ -51,7 +51,7 @@ class Garden extends Component {
             )
           })
         }
-        
+
         </Grid>
       </div>
      )

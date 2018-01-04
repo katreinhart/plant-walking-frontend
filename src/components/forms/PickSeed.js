@@ -45,36 +45,37 @@ class PickSeed extends Component {
   }
 
   render() {
-    if(this.props.currentPlantID) {
-      // don't display pick seed if user has a plant
+    if((this.props.currentPlantID) && (this.props.currentPlantStepsProgress < this.props.currentPlantStepsRequired)) {
+      // if you have a current plant and it isn't finished, you shouldn't be allowed here. 
       return (<Redirect to='/' />)
-    } else
-    return (
-      <div className="outermost-container">
-        <CloseForm title="Pick New Seed"/>
-        <Carousel ref="carousel"
-          decorators={ CarouselDecorator }
-          wrapAround
-          dragging
-          initialSlideHeight={800}
-          style={{'height': '80%'}}
-        >
-          {
-            this.state.plants.map(plant => (
-              <SeedChoice
-                key={plant.id}
-                id={plant.id}
-                name={plant.name}
-                steps_required={ plant.steps_required }
-                handleNext={ this.handleNext }
-                handlePrev={ this.handlePrev }
-                handleSelect={ this.props.handleSelect }
-              />
-            ))
-          }
-        </Carousel>
-      </div>
-    )
+    } else {
+      return (
+        <div className="outermost-container">
+          <CloseForm title="Pick New Seed"/>
+          <Carousel ref="carousel"
+            decorators={ CarouselDecorator }
+            wrapAround
+            dragging
+            initialSlideHeight={800}
+            style={{'height': '80%'}}
+          >
+            {
+              this.state.plants.map(plant => (
+                <SeedChoice
+                  key={plant.id}
+                  id={plant.id}
+                  name={plant.name}
+                  steps_required={ plant.steps_required }
+                  handleNext={ this.handleNext }
+                  handlePrev={ this.handlePrev }
+                  handleSelect={ this.props.handleSelect }
+                />
+              ))
+            }
+          </Carousel>
+        </div>
+      )
+    }
   }
 }
 

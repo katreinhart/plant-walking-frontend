@@ -9,10 +9,10 @@ class CurrentPlantContainer extends React.Component {
   render () {
     console.log(this.props, "PROPS");
     const currentPlantTypeId = this.props.currentPlantTypeId
-    const plantFrame = Math.floor((this.props.steps_recorded/this.props.steps_required) * 9) + 1
+    const plantFrame = Math.floor((this.props.steps_recorded/this.props.steps_required) * 39) + 1
     return (
-      <div className ="plant-container">
-        <img className ="plant-image" alt="current plant" src={`./images/plant-${currentPlantTypeId}/plant-${currentPlantTypeId}-${plantFrame}.png`} />
+      <div className="plant-container justify-center">
+        <img className="plant-image" alt="current plant" src={`./images/plant-${currentPlantTypeId}/plant-${currentPlantTypeId}-${plantFrame}.png`} />
       </div>
     )
   }

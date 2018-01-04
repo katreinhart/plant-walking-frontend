@@ -9,6 +9,10 @@
   align-self: flex-end;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .carousel-arrow {
   padding: 6em 0.5em;
   cursor: pointer;

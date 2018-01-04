@@ -7,14 +7,14 @@ import ProgressBar from './ProgressBar'
 import AddStepsContainer from './AddStepsContainer'
 import ViewGarden from '../garden/ViewGarden'
 
-const HomePlant = ({ plant_id, steps_required, steps_recorded, addSteps, currentPlant }) => {
+const HomePlant = ({ plant_id, steps_required, steps_recorded, addSteps, currentPlantTypeId }) => {
   // if(!plant_id) {
   //   return (<Redirect to='/pickseed' />)
   // } else
   return (
     <div className="outermost-container">
       <Navigation />
-      <CurrentPlantContainer plantId={ plant_id } stepsRecorded={ steps_recorded } currentPlant= { currentPlant }/>
+      <CurrentPlantContainer currentPlantTypeId={ currentPlantTypeId }/>
       <ProgressBar percent={ (parseInt(steps_recorded, 10) / parseInt(steps_required, 10) * 100) } />
       <AddStepsContainer addSteps={ addSteps } />
       <Link to='/garden'>

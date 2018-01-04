@@ -125,7 +125,7 @@ class App extends Component {
 
 
   async updateProgressState() {
-    console.log('updateProgressState', this.state.currentPlantInstanceId)
+    // console.log('updateProgressState', this.state.currentPlantInstanceId)
     const plantInstanceId = this.state.currentPlantInstanceId
 
     const {
@@ -198,9 +198,9 @@ class App extends Component {
     // use to retrieve current user info (email, id, current plant id)
     const userId = localStorage.getItem('user_id')
     const { data: { response }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
-    console.log(response, "response")
+    // console.log(response, "response")
     const { id, plant_instances_id } = response[0]
-    console.log(id, "id", plant_instances_id, "plant_instances_id")
+    // console.log(id, "id", plant_instances_id, "plant_instances_id")
     const prevState = Object.assign({}, this.state)
 
     this.setState({
@@ -223,6 +223,7 @@ class App extends Component {
             plant_id={this.state.currentPlantInstanceId}
             steps_recorded={this.state.currentPlantStepsProgress}
             steps_required={this.state.currentPlantStepsRequired}
+            currentPlantTypeId={ this.state.currentPlantTypeId }
           />
           <Route path='/signup' render={() => <SignUp />} />
           <Route path='/login'

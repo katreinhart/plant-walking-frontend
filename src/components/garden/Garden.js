@@ -47,7 +47,7 @@ class Garden extends Component {
           myPlants.map((plant, i) => {
             const className = [4,5,6,7,12,13,14,15].includes(i) ? "even-plant-row" : "odd-plant-row"
             return (
-              <GardenPlant index={i} className={className} displayImage={plant.plant_types_id}/>
+              <GardenPlant key={i} index={i} className={className} displayImage={plant.plant_types_id}/>
             )
           })
         }

@@ -11,9 +11,11 @@ class CurrentPlantContainer extends React.Component {
   }
 
   render () {
+    console.log(this.props.currentPlantTypeId, "current plant type id");
+    const currentPlantTypeId = this.props.currentPlantTypeId
     return (
       <div className ="plant-container">
-        <img className ="plant-image" alt="current plant" src="./images/seedling_plant.png" />
+        <img className ="plant-image" alt="current plant" src={`./images/plant-${currentPlantTypeId}/plant-${currentPlantTypeId}-1.png`} />
       </div>
     )
   }

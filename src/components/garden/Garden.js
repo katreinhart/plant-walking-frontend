@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Navigation from '../shared/Navigation'
 import BackToPlant from './BackToPlant'
 import Grid from 'react-css-grid'
-const localhostURL = 'http://localhost:2999/api'
+const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
 
 class Garden extends Component {
   constructor(props){
@@ -16,7 +16,7 @@ class Garden extends Component {
 
   async componentDidMount(){
     console.log('user id', this.props.user_id);
-    let {data: {garden}} = await axios.get(`${localhostURL}/plant-instances/garden/${this.props.user_id}`)
+    let {data: {garden}} = await axios.get(`${backendURL}/plant-instances/garden/${this.props.user_id}`)
     console.log('garden', garden);
     this.setState({completedPlants:garden})
   }

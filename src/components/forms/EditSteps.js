@@ -5,6 +5,9 @@ import CloseForm from '../shared/CloseForm'
 import TextInput from '../shared/TextInput'
 import GreenButton from '../shared/GreenButton'
 import axios from 'axios'
+
+const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
+
 class EditSteps extends Component {
   constructor(props){
     super(props)
@@ -15,7 +18,7 @@ class EditSteps extends Component {
     let number_of_steps = document.querySelector('#editedStepInput').value
     let id = this.props.location.state.step_id
     const body ={ id, number_of_steps}
-    await axios.patch('http://localhost:2999/api/steps', body)
+    await axios.patch(`${backendURL}/steps`, body)
 
   }
 

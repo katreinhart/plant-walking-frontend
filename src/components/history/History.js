@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Navigation from '../shared/Navigation'
 import HistoryItem from './HistoryItem'
 import axios from 'axios'
-const localhostURL = 'http://localhost:2999/api'
+const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
 
 class History extends Component {
   constructor(props){
@@ -11,7 +11,7 @@ class History extends Component {
   }
 
   async componentDidMount(){
-    let steps = await axios.get(`${localhostURL}/steps/${this.props.user_id}`)
+    let steps = await axios.get(`${backendURL}/steps/${this.props.user_id}`)
     let stepsArr = steps.data.response
     let stepHolder=[]
     stepsArr.map(step => {

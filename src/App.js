@@ -120,6 +120,7 @@ class App extends Component {
         currentPlantStepsProgress: progress,
       })
       // adding this line fixed the sign in bug where no plant showed up. 
+      console.log('signed in')
       await this.updateProgressState()
     }
 
@@ -177,8 +178,8 @@ class App extends Component {
       } = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
 
       const prevState = Object.assign({}, this.state)
-  
-      this.setState({
+      
+      await this.setState({
         ...prevState,
         triggerPickPlant: nextState.triggerPickPlant,
         currentPlantInstanceId: plant_instance_id,
@@ -186,6 +187,7 @@ class App extends Component {
         currentPlantStepsRequired: steps_required,
         currentPlantStepsProgress: progress
       })
+      console.log('updateProgressState', this.state.currentPlantInstanceId, this.state.currentPlantTypeId)
     }
   }
 
@@ -203,6 +205,7 @@ class App extends Component {
       ...prevState,
       triggerPickPlant: false
     })
+    await this.updateProgressState()
   }
 
   async updateUserInfo({ email, displayName, password }) {
@@ -246,12 +249,14 @@ class App extends Component {
       nextState.triggerPickPlant = plant_instances_id ? false : true 
 
       const prevState = Object.assign({}, this.state)
-      this.setState({
+      await this.setState({
         ...prevState,
         ...nextState,
         currentUserId: id,
         currentPlantInstanceId: plant_instances_id
       })
+
+      await this.updateProgressState()
     }
   }
 

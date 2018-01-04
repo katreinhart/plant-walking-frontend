@@ -9,7 +9,7 @@ import '../../css/pickseed.css'
 
 import axios from 'axios'
 
-const localhostURL = 'http://localhost:2999/api'
+const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
 
 class PickSeed extends Component {
   constructor() {
@@ -28,7 +28,7 @@ class PickSeed extends Component {
   }
 
   async retrievePlantTypes() {
-    const response = await axios.get(`${localhostURL}/plant-types`)
+    const response = await axios.get(`${backendURL}/plant-types`)
     await this.setState({
       plants: [...response.data.plants]
     })

@@ -6,7 +6,6 @@ const HistoryItem = ({step, editSteps}) => {
     // console.log('Hi', step);
     editSteps(step)
   }
-  console.log(step);
   return (
     <div>
       <div className="history-item">

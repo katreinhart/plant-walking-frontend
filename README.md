@@ -1,4 +1,5 @@
 # Garden Walk
+<img src="./readme-images/welcome.png" alt="welcome screen with flower">
 
 ## LINKS  
 ### Group Members:  
@@ -7,13 +8,15 @@
 [Kat Reinhart](https://github.com/katreinhart)  
 
 ### Repos and URLs:  
-Deployed site  
+[Deployed site](https://garden-walk.surge.sh)   
 [Frontend repo](https://github.com/TalusRocks/plant-walking-frontend)  
 [Heroku app](https://secure-reaches-21432.herokuapp.com/api/plant-instances)  
 [Backend repo](https://github.com/TalusRocks/plant-walking-backend)  
 
 ## ABOUT  
-Kat, Rebecca, and Sean created Garden Walk as a Quarter 3 project for Galvanize's Full Stack Web Development program. Our goals were to both learn React and motivate people to walk more by rewarding users with an adorable garden they could grow with their steps.
+Kat, Rebecca, and Sean created Garden Walk as a Quarter 3 project for Galvanize's Full Stack Web Development program. Our goals were to both learn React and motivate people to walk more by rewarding users with an adorable garden they could grow with their steps.  
+
+<img src="./readme-images/pickseed.png" alt="pick a seed">
 
 ## USER STORIES  
 As a user, I can...  
@@ -23,6 +26,11 @@ As a user, I can...
 -View my garden, which is a collection of plants I've grown  
 -View my history of step inputs  
 -Update my profile  
+
+<img src="./readme-images/newplant.png" alt="new plant">
+
+<img src="./readme-images/growingplant1.png" alt="small growing plant">
+
 
 ## NEXT STEPS
 Currently, users must input their steps to make the plant grow. Our vision for this web app is to connect it to a pedometer API so that steps are added automatically.  

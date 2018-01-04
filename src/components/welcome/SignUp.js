@@ -49,7 +49,7 @@ class SignUp extends Component {
   render() {
     return (
       <div className="outermost-container">
-        <CloseForm title="Sign Up"/>
+        {/* <CloseForm title="Sign Up"/> */}
         <form onSubmit={ this.handleSignUp }>
           <TextInputLabeled  label="username" onChange={ this.handleUsernameChange }/>
           <TextInputLabeled label="e-mail" onChange={ this.handleEmailChange }/>

@@ -236,7 +236,7 @@ class App extends Component {
 
           <PrivateRoute path='/garden' component={ Garden } user_id={this.state.currentUserId}/>
           <PrivateRoute path='/menu' component={ Menu } />
-          <PrivateRoute path='/history' component={ History } />
+          <PrivateRoute path='/history' component={ History } user_id={this.state.currentUserId}/>
           <PrivateRoute path='/editsteps' component={ EditSteps } />
           <PrivateRoute path='/deletesteps' component={ DeleteSteps } />
           <PrivateRoute path='/pickseed'

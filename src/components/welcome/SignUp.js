@@ -31,6 +31,7 @@ class SignUp extends Component {
       window.localStorage.setItem('signupsuccess', true)
       window.location.href='/login'
     } catch(error) {
+      console.log(error, "error");
       this.setState({isError: true})
     }
   }

@@ -6,7 +6,6 @@
 
 .splash-image {
   display: flex;
-  margin: 1em auto;
-  max-height: 300px;
+  margin: 0em auto;
   padding: 3em;
 }

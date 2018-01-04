@@ -24,7 +24,7 @@ class HomePlant extends React.Component {
       await this.setState({ ...this.state, completed: true })
     } else {
       await this.setState({ ...this.state, completed: false })
-   }
+    }
   }
 
   async componentDidMount() {

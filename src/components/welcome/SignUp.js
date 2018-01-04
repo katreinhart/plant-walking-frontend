@@ -6,7 +6,7 @@ import CloseForm from '../shared/CloseForm'
 import TextInputLabeled from '../shared/TextInputLabeled'
 import GreenButton from '../shared/GreenButton'
 
-const localhostUrl = 'http://localhost:2999/api/users'
+const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
 
 class SignUp extends Component {
   constructor() {
@@ -27,7 +27,7 @@ class SignUp extends Component {
     e.preventDefault()
     const { username, email, password } = this.state
     try {
-      await axios.post(`${localhostUrl}/register`, { username, email, password })
+      await axios.post(`${backendURL}/users/register`, { username, email, password })
       window.localStorage.setItem('signupsuccess', true)
       window.location.href='/login'
     } catch(error) {

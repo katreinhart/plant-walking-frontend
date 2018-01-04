@@ -15,7 +15,7 @@ import Welcome from './components/welcome/Welcome'
 import PickSeed from './components/forms/PickSeed'
 import Profile from './components/profile/Profile'
 import AnimatePlant from './components/home/AnimatePlant'
-const localhostURL = 'http://localhost:2999/api'
+const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
 
 class App extends Component {
   constructor() {
@@ -67,7 +67,7 @@ class App extends Component {
       number_of_steps: stepsAdded
     }
     console.log(body)
-    const response = await axios.post(`${localhostURL}/steps`, body)
+    const response = await axios.post(`${backendURL}/steps`, body)
     await this.updateProgressState()
   }
 
@@ -80,7 +80,7 @@ class App extends Component {
     const nextState = {}
 
     try {
-      const response = await axios.post(`${localhostURL}/users/login`, body)
+      const response = await axios.post(`${backendURL}/users/login`, body)
       console.log(response.data)
       const {
         token,
@@ -164,7 +164,7 @@ class App extends Component {
             id: plant_instance_id
           }
         }
-      } = await axios.get(`${localhostURL}/plant-instances/${plantInstanceId}`)
+      } = await axios.get(`${backendURL}/plant-instances/${plantInstanceId}`)
       console.log('first axios call returns:', userId, plant_instance_id)
       const {
         data: {
@@ -172,7 +172,7 @@ class App extends Component {
             steps_required
           }
         }
-      } = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
+      } = await axios.get(`${backendURL}/plant-types/${plant_types_id}`)
 
       const prevState = Object.assign({}, this.state)
 
@@ -212,7 +212,7 @@ class App extends Component {
     console.log('update selected plant type to', selectedPlantType)
     const userId = localStorage.getItem('user_id')
     const body = { user_id: userId, plant_types_id: selectedPlantType }
-    const response = await axios.patch(`${localhostURL}/user-profiles/${userId}`, body)
+    const response = await axios.patch(`${backendURL}/user-profiles/${userId}`, body)
     console.log(response)
     const {
       plant_instances_id: plant_instance_id,
@@ -240,7 +240,7 @@ class App extends Component {
         currentUserId: userId
       }
 
-      const { data: { response }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
+      const { data: { response }} = await axios.get(`${backendURL}/user-profiles/${userId}`)
       const { id, plant_instances_id } = response[0]
 
       nextState.triggerPickPlant = plant_instances_id ? false : true
@@ -262,7 +262,7 @@ class App extends Component {
     console.log('plant is finished')
     console.log('trigger pick new plant')
 
-    await axios.patch(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
+    await axios.patch(`${backendURL}/plant-instances/${plantInstanceId}`, { completed: true })
     
   }
 

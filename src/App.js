@@ -13,6 +13,7 @@ import LogIn from './components/welcome/LogIn'
 import Welcome from './components/welcome/Welcome'
 import PickSeed from './components/forms/PickSeed'
 import Profile from './components/profile/Profile'
+import AnimatePlant from './components/home/AnimatePlant'
 
 const localhostURL = 'http://localhost:2999/api'
 
@@ -162,7 +163,7 @@ class App extends Component {
     e.preventDefault()
     console.log('You have chosen plant number', e.target.id)
     const selectedPlantId = parseInt(e.target.id, 10)
-    const userId = this.state.currentUser.userId
+    const userId = this.state.currentUserId
 
     await this.updateSelectedPlantInfo({ selectedPlantId })
   }

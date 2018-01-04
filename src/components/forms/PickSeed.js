@@ -14,7 +14,6 @@ const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
 class PickSeed extends Component {
   constructor() {
     super()
-    console.log('pick seed component constructor')
     this.state = {
       plants: []
     }
@@ -24,7 +23,6 @@ class PickSeed extends Component {
 
   async componentDidMount() {
     await this.retrievePlantTypes()
-    console.log(this.state.plants)
   }
 
   async retrievePlantTypes() {

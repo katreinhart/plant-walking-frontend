@@ -60,7 +60,7 @@ class Garden extends Component {
 
 const GardenPlant = ({index, className, displayImage }) => (
   <div key={index} className={"garden-plant-box " + className }>
-    { displayImage && <img src='./images/plant-1-completed.png' width='50%'/> }
+    { displayImage && <img src='./images/plant-1-completed.png' width='50%' alt='a completed plant'/> }
   </div>
 )
 

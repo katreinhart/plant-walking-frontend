@@ -37,7 +37,7 @@ class HomePlant extends React.Component {
 
   getStepsInput(e) {
     e.preventDefault()
-    const stepsInput = parseInt(e.target.querySelector('.input-field').value)
+    const stepsInput = parseInt(e.target.querySelector('.input-field').value, 10)
 
     this.setState({ ...this.state, stepsInput })
   }

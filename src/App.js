@@ -13,7 +13,7 @@ import LogIn from './components/welcome/LogIn'
 import Welcome from './components/welcome/Welcome'
 import PickSeed from './components/forms/PickSeed'
 import Profile from './components/profile/Profile'
-
+import AnimatePlant from './components/home/AnimatePlant'
 const localhostURL = 'http://localhost:2999/api'
 
 class App extends Component {
@@ -64,24 +64,23 @@ class App extends Component {
       user_id: this.state.currentUserId,
       number_of_steps: stepsAdded
     }
-    console.log('in handle Steps',body)
+    console.log(body)
     const response = await axios.post(`${localhostURL}/steps`, body)
-    this.updateProgressState()
-    return stepsAdded
+    await this.updateProgressState()
   }
 
   async handleSignInClick(e) {
     e.preventDefault()
-    console.log('sign in')
     const email = e.target.querySelectorAll('input')[0].value
     const password = e.target.querySelectorAll('input')[1].value
-
     const body = { email, password }
+
+    const nextState = {}
 
     try {
       const response = await axios.post(`${localhostURL}/users/login`, body)
       console.log(response.data)
-      let {
+      const {
         token,
         email,
         userId: user_id,
@@ -92,19 +91,23 @@ class App extends Component {
 
       if(!plantInstanceId) {
         console.log('We need to pick a plant!')
-        // render pick plant display
+        nextState.triggerPickPlant = true
       }
 
+      // this is all kinda hacky stuff to keep track of whether/which user is logged in
       localStorage.setItem('token', token)
       window.isAuthenticated = true
       localStorage.setItem('user_id', user_id)
 
+      // set state to new values
       const prevState = Object.assign({}, this.state)
 
-      this.setState({
+      await this.setState({
         ...prevState,
+        ...nextState,
         authenticated: true,
         loginError: false,
+        triggerPickPlant: false,
         token: token,
         currentUserEmail: email,
         currentUserId: user_id,
@@ -112,6 +115,9 @@ class App extends Component {
         currentPlantTypeId: plant_types_id,
         currentPlantStepsProgress: progress,
       })
+      // adding this line fixed the sign in bug where no plant showed up.
+      console.log('signed in')
+      await this.updateProgressState()
     }
 
     catch(error){
@@ -119,99 +125,134 @@ class App extends Component {
       const prevState = Object.assign({}, this.state)
       this.setState({
         loginError: true,
+        triggerPickPlant: false,
         authenticated: false,
+        currentUserId: null,
+        currentUserEmail: '',
+        currentUserDisplay: '',
+        currentPlantTypeId: null,
+        currentPlantInstanceId: null,
+        currentPlantStepsRequired: null,
+        currentPlantStepsProgress: null
       })
     }
   }
 
 
-  async updateProgressState(number_of_steps_added) {
+  async updateProgressState() {
+    // takes current plant instance id and user Id from state
+    // makes API calls to get the plant instance and the plant type info
+    // stores this info in state
 
-    // console.log('updateProgressState', this.state.currentPlantInstanceId)
     const plantInstanceId = this.state.currentPlantInstanceId
+    const userId = this.state.currentUserId
+    const nextState = {}
 
-    const {
-      data: {
-        plant_instance: {
-          user_id,
-          plant_types_id,
-          progress,
-          id: plant_instance_id
+    if(userId && !plantInstanceId) {
+      console.log('We need to pick you a plant... says the updateProgressState function')
+      nextState.triggerPickPlant = true
+    } else if (!userId) {
+      console.log('no logged in user')
+    } else {
+      const {
+        data: {
+          plant_instance: {
+            user_id,
+            plant_types_id,
+            progress,
+            id: plant_instance_id
+          }
         }
-      }
-    } = await axios.get(`${localhostURL}/plant-instances/${plantInstanceId}`)
+      } = await axios.get(`${localhostURL}/plant-instances/${plantInstanceId}`)
 
-    const {
-      data: {
-        plant: {
-          steps_required
+      const {
+        data: {
+          plant: {
+            steps_required
+          }
         }
-      }
-    } = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
+      } = await axios.get(`${localhostURL}/plant-types/${plant_types_id}`)
 
-    const prevState = Object.assign({}, this.state)
+      const prevState = Object.assign({}, this.state)
 
-    this.setState({
-      ...prevState,
-      currentPlantInstanceId: plant_instance_id,
-      currentPlantTypeId: plant_types_id,
-      currentPlantStepsRequired: steps_required,
-      currentPlantStepsProgress: progress,
-      stepsToGrow:number_of_steps_added
-    })
+      await this.setState({
+        ...prevState,
+        triggerPickPlant: nextState.triggerPickPlant,
+        currentPlantInstanceId: plant_instance_id,
+        currentPlantTypeId: plant_types_id,
+        currentPlantStepsRequired: steps_required,
+        currentPlantStepsProgress: progress
+      })
+    }
   }
 
   async handleSelectSeed (e) {
     e.preventDefault()
-    console.log('You have chosen plant number', e.target.id)
-    const selectedPlantId = parseInt(e.target.id, 10)
-    const userId = this.state.currentUserId
 
-    await this.updateSelectedPlantInfo({ selectedPlantId })
+    console.log('You have chosen plant number', e.target.id)
+
+    const selectedPlantType = parseInt(e.target.id, 10)
+    const userId = this.state.currentUserId
+    await this.updateSelectedPlantInfo({ selectedPlantType })
+
+    const prevState = Object.assign({}, this.state)
+    await this.setState({
+      ...prevState,
+      triggerPickPlant: false
+    })
+    await this.updateProgressState()
   }
 
   async updateUserInfo({ email, displayName, password }) {
     // change a user's display name or password (STRETCH)
   }
 
-  async updateSelectedPlantInfo({ selectedPlantId }) {
-    // make db call to update user's current plant to the new plant type specified
-    console.log(selectedPlantId)
+  async updateSelectedPlantInfo({ selectedPlantType }) {
+    console.log('update selected plant type to', selectedPlantType)
     const userId = localStorage.getItem('user_id')
-    const body = { user_id: userId, plant_types_id: selectedPlantId }
-    console.log(body)
+    const body = { user_id: userId, plant_types_id: selectedPlantType }
     const response = await axios.patch(`${localhostURL}/user-profiles/${userId}`, body)
-    console.log(response)
+
     const {
-      plant_types_id,
       id: plant_instance_id
     } = response.data.result[0]
 
-    console.log(plant_types_id, plant_instance_id)
     const prevState = Object.assign({}, this.state)
-    this.setState({
+    await this.setState({
       ...prevState,
       currentPlantInstanceId: plant_instance_id,
-      currentPlantTypeId: plant_types_id,
+      currentPlantTypeId: selectedPlantType,
       currentPlantStepsProgress: 0
     })
+
+    await this.updateProgressState()
   }
 
   async getUserInformation() {
-    // use to retrieve current user info (email, id, current plant id)
+// use to retrieve current user info (email, id, current plant id)
     const userId = localStorage.getItem('user_id')
-    const { data: { response }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
-    // console.log(response, "response")
-    const { id, plant_instances_id } = response[0]
-    // console.log(id, "id", plant_instances_id, "plant_instances_id")
-    const prevState = Object.assign({}, this.state)
+    if(!userId) {
+      console.log('This is an error, you should not be logged in')
+    } else {
+      const nextState = {
+        currentUserId: userId
+      }
 
-    this.setState({
-      ...prevState,
-      currentUserId: id,
-      currentPlantInstanceId: plant_instances_id
-    })
+      const { data: { response }} = await axios.get(`${localhostURL}/user-profiles/${userId}`)
+      const { id, plant_instances_id } = response[0]
 
+      nextState.triggerPickPlant = plant_instances_id ? false : true
+
+      const prevState = Object.assign({}, this.state)
+      await this.setState({
+        ...prevState,
+        ...nextState,
+        currentUserId: id,
+        currentPlantInstanceId: plant_instances_id
+      })
+
+      await this.updateProgressState()
+    }
   }
 
   render() {
@@ -221,11 +262,10 @@ class App extends Component {
         <div className="outermost-container">
           <PrivateRoute path='/' exact
             component={ HomePlant }
+            handleAddSteps={this.handleAddSteps}
             currentPlantInstanceId={ this.state.currentPlantInstanceId }
-            addSteps={this.handleAddSteps}
-            plant_id={this.state.currentPlantInstanceId}
-            steps_recorded={this.state.currentPlantStepsProgress}
-            steps_required={this.state.currentPlantStepsRequired}
+            currentPlantStepsProgress={this.state.currentPlantStepsProgress}
+            currentPlantStepsRequired={this.state.currentPlantStepsRequired}
             currentPlantTypeId={ this.state.currentPlantTypeId }
           />
           <Route path='/signup' render={() => <SignUp />} />
@@ -256,6 +296,7 @@ class App extends Component {
 }
 
 const LogOut = () => {
+
   window.isAuthenticated = false
   localStorage.removeItem('user_id')
   localStorage.removeItem('token')

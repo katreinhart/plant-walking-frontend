@@ -260,8 +260,8 @@ class App extends Component {
     const plantInstanceId = this.state.currentPlantInstanceId
     console.log('plant is finished')
     console.log('trigger pick new plant')
-    // await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
-    // this API call needs to be created. 
+    await axios.put(`${localhostURL}/plant-instances/${plantInstanceId}`, { completed: true })
+    
   }
 
   render() {

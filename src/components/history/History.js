@@ -12,24 +12,17 @@ class History extends Component {
 
   async componentDidMount(){
     let steps = await axios.get(`${localhostURL}/steps/${this.props.user_id}`)
-    console.log('history steps', steps.data.response);
     let stepsArr = steps.data.response
     let stepHolder=[]
     stepsArr.map(step => {
       let date = new Date(step.created_at).toLocaleDateString()
-      console.log(date, step.number_of_steps);
       let stepObj = {date:date, steps:step.number_of_steps, step_id:step.id}
       stepHolder.push(stepObj)
     })
     this.setState({steps:stepHolder})
-    console.log('Make history', this.state.steps);
   }
 
-  async editSteps(step){
-    console.log('yay edity', step);
 
-
-  }
 
   render() {
     return (
@@ -41,7 +34,7 @@ class History extends Component {
           </div>
           <div className="history-list-container">
             <hr></hr>
-            {this.state.steps.map((step, i) => <HistoryItem key={i} editSteps={this.editSteps} step={step}/>)}
+            {this.state.steps.map((step, i) => <HistoryItem key={i} step={step}/>)}
 
 
           </div>

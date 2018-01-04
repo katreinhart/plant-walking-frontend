@@ -12,16 +12,15 @@ class Garden extends Component {
       this.state =  { completedPlants:[] }
   }
 
-
-
   async componentDidMount(){
     let {data: {garden}} = await axios.get(`${backendURL}/plant-instances/garden/${this.props.user_id}`)
-    this.setState({completedPlants:garden})
+    await this.setState({completedPlants:garden})
   }
 
 
   render() {
     const myPlants = [...this.state.completedPlants]
+    
     while(myPlants.length < 16) {
       myPlants.push({})
     }

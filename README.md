@@ -53,6 +53,8 @@ Currently, users must input their steps to make the plant grow. Our vision for t
 
 This web app is also ripe for social sharing. We'd like to make it easy for users to share their plants with friends.  
 
+User authorization is also in need of additional validation checks.
+
 ### Menu:
 <kbd>
   <img src="./readme-images/menu.png" width="350px" alt="app menu">

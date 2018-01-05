@@ -42,11 +42,21 @@ As a user, I can...
   <img src="./readme-images/growingplant1.png" width="350px" alt="small growing plant">
 </kbd>
 
+### An almost-fully-grown plant:
+<kbd>
+  <img src="./readme-images/grownplant.png" width="350px" alt="grown plant">
+</kbd>
+
 
 ## NEXT STEPS
 Currently, users must input their steps to make the plant grow. Our vision for this web app is to connect it to a pedometer API so that steps are added automatically.  
 
 This web app is also ripe for social sharing. We'd like to make it easy for users to share their plants with friends.  
+
+### Menu:
+<kbd>
+  <img src="./readme-images/menu.png" width="350px" alt="app menu">
+</kbd>
 
 ## BUILT WITH
 -HTML5, CSS3  \
@@ -55,6 +65,11 @@ This web app is also ripe for social sharing. We'd like to make it easy for user
 -React Router  \
 -Node.js, Express.js, Knex.js  \
 -PostgreSQL  
+
+### Menu:
+<kbd>
+  <img src="./readme-images/garden.png" width="350px" alt="garden view showing completed plants">
+</kbd>
 
 ## INSTALLATION
 To run this locally:

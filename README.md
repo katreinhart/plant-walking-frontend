@@ -1,5 +1,7 @@
 # Garden Walk
-<img src="./readme-images/welcome.png" width="350px" alt="welcome screen with flower">
+<kbd>
+  <img src="./readme-images/welcome.png" width="350px" alt="welcome screen with flower">
+</kbd>
 
 ## LINKS  
 ### Group Members:  
@@ -16,7 +18,10 @@
 ## ABOUT  
 Kat, Rebecca, and Sean created Garden Walk as a Quarter 3 project for Galvanize's Full Stack Web Development program. Our goals were to both learn React and motivate people to walk more by rewarding users with an adorable garden they could grow with their steps.  
 
-<img src="./readme-images/pickseed.png" width="350px" alt="pick a seed">
+### Pick a seed:
+<kbd>
+  <img src="./readme-images/pickseed.png" width="350px" alt="pick a seed">
+</kbd>
 
 ## USER STORIES  
 As a user, I can...  
@@ -27,11 +32,15 @@ As a user, I can...
 -View my history of step inputs  
 -Update my profile  
 
+### A new plant:
 <kbd>
   <img src="./readme-images/newplant.png" width="350px" alt="new plant">
 </kbd>
 
-<img src="./readme-images/growingplant1.png" width="350px" alt="small growing plant">
+### A growing plant:
+<kbd>
+  <img src="./readme-images/growingplant1.png" width="350px" alt="small growing plant">
+</kbd>
 
 
 ## NEXT STEPS

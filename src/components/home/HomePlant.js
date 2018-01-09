@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom'
-// import './App.css';
 import Navigation from '../shared/Navigation'
 import CurrentPlantContainer from './CurrentPlantContainer'
 import ProgressBar from './ProgressBar'
@@ -19,12 +18,10 @@ class HomePlant extends React.Component {
   }
 
   async updatePlantState() {
-    if((this.props.currentPlantStepsRequired && this.props.currentPlantStepsProgress) &&
-      (this.props.currentPlantStepsProgress >= this.props.currentPlantStepsRequired)) {
-      await this.setState({ ...this.state, completed: true })
-    } else {
-      await this.setState({ ...this.state, completed: false })
-    }
+    const { currentPlantStepsRequired: required, currentPlantStepsProgress: current } = this.props
+    const isCompleted = required && current && (current >= required) 
+
+    await this.setState({ ...this.state, completed })
   }
 
   async componentDidMount() {

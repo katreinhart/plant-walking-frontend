@@ -19,15 +19,18 @@ const backendURL = 'https://secure-reaches-21432.herokuapp.com/api'
 class App extends Component {
   constructor() {
     super()
-    const token = localStorage.getItem('token')
-
-    if(token) {
-      localStorage.setItem('logged_in', true)
-      window.isAuthenticated = true
-    } else {
-      localStorage.setItem('logged_in', false)
-      window.isAuthenticated = false
-    }
+    /*
+      A few notes on this:
+      - Attached `isAuthenticated` to the global window seems particularly dangerous.
+        I would focus on keeping it accessible via state.
+      - I don't think you want to handle localStorage / side effect-y stuff inside of
+        the constructor. It'd be better to do this in a lifecycle method.
+      - In the case below (which I refactored a bit) you don't actually know if the
+        token is valid at this point, correct?
+     */
+    const hasToken = !!localStorage.getItem('token')
+    localStorage.setItem('logged_in', hasToken)
+    window.isAuthenticated = hasToken
 
     this.state = {
       loginError: false,
@@ -90,9 +93,7 @@ class App extends Component {
         progress
       } = response.data
 
-      if(!plantInstanceId) {
-        nextState.triggerPickPlant = true
-      }
+      nextState.triggerPickPlant = !plantInstanceId
 
       // this is all kinda hacky stuff to keep track of whether/which user is logged in
       localStorage.setItem('token', token)
@@ -152,6 +153,11 @@ class App extends Component {
     } else if (!userId) {
       console.log('no logged in user')
     } else {
+      /*
+        This level of destructuring is super cool but might cause you some
+        unexpected errors later on if something is undefined. No need to
+        change it, but something to be aware of.
+      */
       const {
         data: {
           plant_instance: {
@@ -195,17 +201,14 @@ class App extends Component {
     await this.updateProgressState()
   }
 
-  async updateUserInfo({ email, displayName, password }) {
-    // change a user's display name or password (STRETCH)
-  }
+  // If it's a stretch or not yet actually implemented, code should be removed.
 
   async updateSelectedPlantInfo({ selectedPlantType }) {
     const userId = localStorage.getItem('user_id')
     const body = { user_id: userId, plant_types_id: selectedPlantType }
     const response = await axios.patch(`${backendURL}/user-profiles/${userId}`, body)
     const {
-      plant_instances_id: plant_instance_id,
-
+      plant_instances_id: plant_instance_id
     } = response.data.result[0]
 
     const prevState = Object.assign({}, this.state)
@@ -220,7 +223,7 @@ class App extends Component {
   }
 
   async getUserInformation() {
-// use to retrieve current user info (email, id, current plant id)
+    // use to retrieve current user info (email, id, current plant id)
     const userId = localStorage.getItem('user_id')
     if(!userId) {
       console.log('This is an error, you should not be logged in')

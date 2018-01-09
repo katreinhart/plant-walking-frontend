@@ -22,6 +22,7 @@ class EditSteps extends Component {
 
   }
 
+  // Remove dead code!
   render() {
     console.log('EditSteps baby',this.props.location.state);
     return (
@@ -29,7 +30,6 @@ class EditSteps extends Component {
         <Navigation />
         <CloseForm title="Edit Steps"/>
         <p className="text-ctr green" id="date">Grown On {this.props.location.state.date}</p>
-        {/* <p className="text-ctr green" id="numOfSteps">Steps: {this.props.location.state.step}</p> */}
         <TextInput oldSteps={`${this.props.location.state.step}`}/>
         <div className="buttons-container">
           <div className="delete">

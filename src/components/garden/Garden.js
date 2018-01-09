@@ -21,6 +21,11 @@ class Garden extends Component {
   render() {
     const myPlants = [...this.state.completedPlants]
     
+    /*
+      Why 16? I imagine this is the max amount of plants you can have but
+      it just seems like magic left here on its own. Better to name it
+      with a constant variable like MAX_PLANTS_SIZE or something.
+    */
     while(myPlants.length < 16) {
       myPlants.push({})
     }

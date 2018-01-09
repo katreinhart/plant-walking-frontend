@@ -1,6 +1,7 @@
 import React from 'react'
 
 const PlantContainer = ({ handleNext, handlePrev, plantId, stepsRecorded }) => {
+  // Like we discussed, I think conditionally hiding these arrows might be a bit hacky.
   const leftArrow = <div className ="carousel-arrow left" onClick={handlePrev}>
     <i className ="material-icons">keyboard_arrow_left</i>
   </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CloseForm from '../shared/CloseForm'
 
+// Why is this a stateful component?
 class DeleteSteps extends Component {
   state = {}
   render() {
